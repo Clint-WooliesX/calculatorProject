@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+@font-face {
+  font-family: "myFirstFont";
+  src: url(/digital.ttf);
+}
+
+body {
+background-image: url(/wood.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.mask {
+  position: relative;
+  z-index: 6;
+  min-width: 360px;
+  min-height: 550px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  filter: drop-shadow(6px 6px 10px black);
+}
+
+.solar {
+  border: 3px inset black;
+  position: absolute;
+  overflow: hidden;
+  z-index: 9;
+  height: 45px;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 4px black;
+  left: 50%;
+  top: 11px;
+}
+
+.calc-case {
+  z-index: 0;
+  display: flex;
+  position: absolute;
+  min-width: 360px;
+  min-height: 550px;
+  clip-path: polygon(
+    15px 0px,
+    345px 0px,
+    360px 15px,
+    360px 550px,
+    550px 360px,
+    550px 550px,
+    0px 550px,
+    0px 15px
+  );
+  //   border-radius: %;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  background-color: #4a4a4c;
+  box-shadow: inset 4px 4px 4px rgba(137, 136, 136, 0.59),
+    inset -4px -4px 4px rgba(155, 154, 154, 0.59);
+}
+
+.display {
+  font-family: "digital";
+  background: #a4b1a6;
+  position: absolute;
+  top: 70px;
+  left: 24px;
+  height: 58px;
+  width: 290px;
+  border: 10px inset #2e2d27d0;
+  border-radius: 15px;
+  // box-shadow: inset 0px -1px 1px rgba(0, 0, 0, 0.527);
+}
+.num-input {
+//   padding: 0;
+//   margin: 0;
+  font-family: "myFirstFont";
+  font-size: 60px;
+  text-align: right;
+  border: 0px;
+  background-color: #ffffff00;
+  width: 285px;
+  height: 65px;
+  margin: 0;
+  &:focus { outline: none; }
+}
+
+.grooves {
+  display: flex;
+  position: absolute;
+  justify-self: center;
+  left: 17px;
+  height: 530px;
+  width: 315px;
+  border-left: 3px inset black;
+  border-right: 3px inset black;
+  border-bottom: 3px inset black;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 1px 2px 2px black, -1px -1px 2px black;
+  &--divider {
+    position: absolute;
+    left: 17px;
+    height: 159px;
+    width: 315px;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 3px inset black;
+    box-shadow: inset 0px -1px 1px rgba(0, 0, 0, 0.527);
+  }
+}
+
+.buttons {
+  display: flex;
+  position: absolute;
+  justify-self: center;
+  left: 17px;
+  top: 164px;
+  margin: 5px;
+  height: 355px;
+  width: 308px;
+  z-index: 6;
+}
+
+.buttons--grid {
+  display: grid;
+  margin: 10px;
+  row-gap: 10px;
+  column-gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 35px repeat(5, 1fr);
+  height: 95%;
+  width: 100%;
+}
+
+.push-button {
+  /* display:grid; */
+  display: flex;
+  cursor:pointer;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #2a2827;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  border: 3px groove black;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286),
+    inset -2px -2px 2px black;
+  &:active {
+    color: rgb(215, 215, 215);
+    border: 1px inset black;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0);
+  }
+}
+.orange {
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  background-color: #eaa22c;
+  border: 3px groove black;
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
+    inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+}
+.large {
+  margin: 0px;
+  background-color: #2a2827;
+  grid-column: 4;
+  grid-row: 5 / span 2;
+  border-top-left-radius: 8%;
+  border-top-right-radius: 5%;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+  border: 3px groove black;
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
+    inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+}
+
+p {
+  font-size: 34px;
+  cursor:pointer;
+  font-family: "Grape Nuts", cursive;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  &--small-font {
+    font-family: "Grape Nuts", cursive;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+
+  }
+}
