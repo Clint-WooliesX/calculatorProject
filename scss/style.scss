@@ -101,16 +101,39 @@ body {
 }
 
 .num-input {
+  position: absolute;
+  top: 5px;
+  right: 10px;
   font-family: "myFirstFont";
-  font-size: 60px;
+  font-size: 58px;
+  letter-spacing: 5px;
   text-align: right;
   border: 0px;
+  padding: 5px;
   background-color: #ffffff00;
   width: 100%;
   height: 65px;
   margin: 0;
-  &:focus {
-    outline: none;
+  //   &:focus {
+  //     outline: none;
+  //   }
+  &--commas {
+    position: absolute;
+    letter-spacing: 5px;
+    right: -5.5px;
+  }
+  &__indicators {
+    position: absolute;
+
+    &--smallR {
+      right: -5px;
+      font-size: 25px;
+    }
+    &--smallL {
+        text-align: left;
+      left: -3.5px;
+      font-size: 60px;
+    }
   }
 }
 

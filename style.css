@@ -92,17 +92,36 @@ body {
 }
 
 .num-input {
+  position: absolute;
+  top: 5px;
+  right: 10px;
   font-family: "myFirstFont";
-  font-size: 60px;
+  font-size: 58px;
+  letter-spacing: 5px;
   text-align: right;
   border: 0px;
+  padding: 5px;
   background-color: rgba(255, 255, 255, 0);
   width: 100%;
   height: 65px;
   margin: 0;
 }
-.num-input:focus {
-  outline: none;
+.num-input--commas {
+  position: absolute;
+  letter-spacing: 5px;
+  right: -5.5px;
+}
+.num-input__indicators {
+  position: absolute;
+}
+.num-input__indicators--smallR {
+  right: -5px;
+  font-size: 25px;
+}
+.num-input__indicators--smallL {
+  text-align: left;
+  left: -3.5px;
+  font-size: 60px;
 }
 
 .buttons {
