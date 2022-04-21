@@ -6,6 +6,18 @@ const operator = {
   percent: "%",
   root: "&#8730",
 };
+
+
+
+const operatorKeys =(array) =>{
+for (let value of Object.keys(operator)) {
+ console.log(value);
+}
+
+}
+
+operatorKeys(operator);
+
 const commas = {
   thousand: ",&nbsp;&nbsp;&nbsp;",
   million: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;",
@@ -20,6 +32,7 @@ const maxCharacters = 8;
 let characterCount = 0,
   decimalCount = 0,
   storageIndex = 0;
+tempString="";
 
 const buttonPress = (key) => {
   if (characterCount >= 8) {
@@ -28,4 +41,15 @@ const buttonPress = (key) => {
   }
   characterCount++;
   console.log("chars = " + characterCount + " key =" + key);
+tempStorage(key);
 };
+
+const tempStorage = (value) => {
+  tempString = tempString + value;
+  console.log(tempString);
+  updateDisplay(tempString)
+}
+
+const updateDisplay = (value) => {
+  document.getElementById("LCDnumbers").innerHTML = value
+}

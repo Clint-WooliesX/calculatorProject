@@ -108,17 +108,21 @@ body {
 }
 .num-input--commas {
   position: absolute;
+  display: none;
   letter-spacing: 5px;
   right: -5.5px;
 }
 .num-input__indicators {
   position: absolute;
+  display: none;
 }
 .num-input__indicators--smallR {
+  display: none;
   right: -5px;
   font-size: 25px;
 }
 .num-input__indicators--smallL {
+  display: none;
   text-align: left;
   left: -3.5px;
   font-size: 60px;

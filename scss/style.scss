@@ -119,17 +119,21 @@ body {
   //   }
   &--commas {
     position: absolute;
+    display:none;
     letter-spacing: 5px;
     right: -5.5px;
   }
   &__indicators {
     position: absolute;
+    display:none;
 
     &--smallR {
+      display:none;
       right: -5px;
       font-size: 25px;
     }
     &--smallL {
+      display:none;
         text-align: left;
       left: -3.5px;
       font-size: 60px;
