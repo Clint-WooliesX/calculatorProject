@@ -129,7 +129,6 @@ body {
 }
 
 .push-button {
-  /* display:grid; */
   display: flex;
   cursor: pointer;
   justify-content: center;
@@ -138,10 +137,10 @@ body {
   height: 100%;
   color: white;
   background-color: #2a2827;
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  border-bottom-left-radius: 20%;
-  border-bottom-right-radius: 20%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: 3px groove black;
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
 }
@@ -152,13 +151,13 @@ body {
 }
 
 .orange {
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  border-bottom-left-radius: 20%;
-  border-bottom-right-radius: 20%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   background-color: #eaa22c;
   border: 3px groove black;
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2), inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.35), inset -2px -2px 2px rgba(155, 155, 155, 0.35);
 }
 
 .large {
@@ -166,12 +165,12 @@ body {
   background-color: #2a2827;
   grid-column: 4;
   grid-row: 5/span 2;
-  border-top-left-radius: 8%;
-  border-top-right-radius: 5%;
-  border-bottom-left-radius: 15%;
-  border-bottom-right-radius: 15%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: 3px groove black;
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2), inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
 }
 
 p {

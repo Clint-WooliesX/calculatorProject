@@ -3,17 +3,16 @@
   padding: 0;
 }
 
-
 @font-face {
   font-family: "myFirstFont";
   src: url(/digital.ttf);
 }
 
 body {
-background-image: url(/wood.jpg);
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
+  background-image: url(/wood.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   background-color: antiquewhite;
   display: flex;
   flex-direction: column;
@@ -21,6 +20,7 @@ background-position: center;
   align-items: center;
   height: 100vh;
 }
+
 .mask {
   position: relative;
   z-index: 6;
@@ -59,7 +59,6 @@ background-position: center;
     0px 550px,
     0px 15px
   );
-  //   border-radius: %;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   background-color: #4a4a4c;
@@ -77,11 +76,8 @@ background-position: center;
   width: 290px;
   border: 10px inset #2e2d27d0;
   border-radius: 15px;
-  // box-shadow: inset 0px -1px 1px rgba(0, 0, 0, 0.527);
 }
 .num-input {
-//   padding: 0;
-//   margin: 0;
   font-family: "myFirstFont";
   font-size: 60px;
   text-align: right;
@@ -90,7 +86,9 @@ background-position: center;
   width: 285px;
   height: 65px;
   margin: 0;
-  &:focus { outline: none; }
+  &:focus {
+    outline: none;
+  }
 }
 
 .grooves {
@@ -141,22 +139,20 @@ background-position: center;
 }
 
 .push-button {
-  /* display:grid; */
   display: flex;
-  cursor:pointer;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   color: white;
   background-color: #2a2827;
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  border-bottom-left-radius: 20%;
-  border-bottom-right-radius: 20%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: 3px groove black;
-  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286),
-    inset -2px -2px 2px black;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
   &:active {
     color: rgb(215, 215, 215);
     border: 1px inset black;
@@ -164,32 +160,30 @@ background-position: center;
   }
 }
 .orange {
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  border-bottom-left-radius: 20%;
-  border-bottom-right-radius: 20%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   background-color: #eaa22c;
   border: 3px groove black;
-    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
-    inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+ box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.350), inset -2px -2px 2px rgba(155, 155, 155, 0.350);
 }
 .large {
   margin: 0px;
   background-color: #2a2827;
   grid-column: 4;
   grid-row: 5 / span 2;
-  border-top-left-radius: 8%;
-  border-top-right-radius: 5%;
-  border-bottom-left-radius: 15%;
-  border-bottom-right-radius: 15%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   border: 3px groove black;
-  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.2),
-    inset -2px -2px 2px rgba(255, 255, 255, 0.2);
+ box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
 }
 
 p {
   font-size: 34px;
-  cursor:pointer;
+  cursor: pointer;
   font-family: "Grape Nuts", cursive;
   font-family: "Lato", sans-serif;
   text-align: center;
@@ -197,6 +191,5 @@ p {
     font-family: "Grape Nuts", cursive;
     font-family: "Lato", sans-serif;
     font-size: 20px;
-
   }
 }
