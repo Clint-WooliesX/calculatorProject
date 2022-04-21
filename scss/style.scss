@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 @font-face {
@@ -28,19 +29,7 @@ body {
   min-height: 550px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
-  filter: drop-shadow(6px 6px 10px black);
-}
-
-.solar {
-  border: 3px inset black;
-  position: absolute;
-  overflow: hidden;
-  z-index: 9;
-  height: 45px;
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 4px black;
-  left: 50%;
-  top: 11px;
+  filter: drop-shadow(6px 6px 5px black);
 }
 
 .calc-case {
@@ -65,25 +54,59 @@ body {
   box-shadow: inset 4px 4px 4px rgba(137, 136, 136, 0.59),
     inset -4px -4px 4px rgba(155, 154, 154, 0.59);
 }
+.grooves {
+  display: flex;
+  position: absolute;
+  justify-self: center;
+  left: 15px;
+  height: 530px;
+  width: 330px;
+  border-left: 2.5px inset black;
+  border-right: 2.5px inset black;
+  border-bottom: 2.5px inset black;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 1px 2px 2px black, -1px -1px 2px black;
+  &--divider {
+    position: absolute;
+    left: 20px;
+    height: 170px;
+    width: 325px;
+    border-bottom: 3px inset black;
+    box-shadow: inset 1px -2px 1px rgba(0, 0, 0, 0.527);
+  }
+}
+.solar {
+  border: 3px inset black;
+  position: absolute;
+  z-index: 9;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 4px black;
+  right: 25px;
+  top: 11px;
+}
 
 .display {
   font-family: "digital";
   background: #a4b1a6;
   position: absolute;
   top: 70px;
-  left: 24px;
-  height: 58px;
-  width: 290px;
-  border: 10px inset #2e2d27d0;
+  left: 30px;
+  height: 85px;
+  width: 305px;
+  border: 7px inset #2e2d27d0;
   border-radius: 15px;
+  box-shadow: inset 3px 3px 10px black;
 }
+
 .num-input {
   font-family: "myFirstFont";
   font-size: 60px;
   text-align: right;
   border: 0px;
   background-color: #ffffff00;
-  width: 285px;
+  width: 100%;
   height: 65px;
   margin: 0;
   &:focus {
@@ -91,56 +114,30 @@ body {
   }
 }
 
-.grooves {
-  display: flex;
-  position: absolute;
-  justify-self: center;
-  left: 17px;
-  height: 530px;
-  width: 315px;
-  border-left: 3px inset black;
-  border-right: 3px inset black;
-  border-bottom: 3px inset black;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  box-shadow: 1px 2px 2px black, -1px -1px 2px black;
-  &--divider {
-    position: absolute;
-    left: 17px;
-    height: 159px;
-    width: 315px;
-    border-left: 5px solid rgba(255, 255, 255, 0);
-    border-bottom: 3px inset black;
-    box-shadow: inset 0px -1px 1px rgba(0, 0, 0, 0.527);
-  }
-}
-
 .buttons {
   display: flex;
   position: absolute;
-  justify-self: center;
-  left: 17px;
   top: 164px;
-  margin: 5px;
   height: 355px;
-  width: 308px;
+  width: 100%;
   z-index: 6;
 }
 
 .buttons--grid {
   display: grid;
-  margin: 10px;
-  row-gap: 10px;
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  row-gap: 3px;
   column-gap: 12px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 35px repeat(5, 1fr);
-  height: 95%;
+  height: 96%;
   width: 100%;
 }
 
 .push-button {
   display: flex;
-  cursor: pointer;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -153,41 +150,32 @@ body {
   border-bottom-right-radius: 15px;
   border: 3px groove black;
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
+  cursor: pointer;
+  &--orange {
+    background-color: #eaa22c;
+    box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.35),
+      inset -2px -2px 2px rgba(155, 155, 155, 0.35);
+  }
+  &--large {
+    margin: 0px;
+    background-color: #2a2827;
+    grid-column: 4;
+    grid-row: 5 / span 2;
+  }
   &:active {
     color: rgb(215, 215, 215);
     border: 1px inset black;
     box-shadow: inset 2px 2px 4px rgba(0, 0, 0);
   }
 }
-.orange {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #eaa22c;
-  border: 3px groove black;
- box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.350), inset -2px -2px 2px rgba(155, 155, 155, 0.350);
-}
-.large {
-  margin: 0px;
-  background-color: #2a2827;
-  grid-column: 4;
-  grid-row: 5 / span 2;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border: 3px groove black;
- box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
-}
 
-p {
+.button-text {
   font-size: 34px;
   cursor: pointer;
   font-family: "Grape Nuts", cursive;
   font-family: "Lato", sans-serif;
   text-align: center;
-  &--small-font {
+  &--small {
     font-family: "Grape Nuts", cursive;
     font-family: "Lato", sans-serif;
     font-size: 20px;
