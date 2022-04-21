@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
     <title>Calculator Project</title>
@@ -21,11 +18,11 @@
         <div class="grooves--divider"></div>
         <img class="solar" src="/solar.png" alt="" srcset="">
         <div class="display">
-            <p id="LCDnumbers" class="num-input">99999999</p>
-            <p id="LCDcommas"class="num-input num-input--commas">,&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;</p>
+            <p id="LCDnumbers" class="num-input">9999.000</p>
+            <p id="LCDcommas" class="num-input num-input--commas">,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <div class="num-input num-input__indicators--smallR">
-            <p id="LCDmem"></p>m</p>
-            <p id="LCDoperator">&#xF7</p>
+                <p id="LCDmem"></p>m</p>
+                <p id="LCDoperator">%</p>
             </div>
             <div class="num-input num-input__indicators--smallL">
                 <p id="LCDnegative">-</p>
@@ -33,73 +30,73 @@
         </div>
         <div class="buttons">
             <div class="buttons--grid">
-                <div class="push-button push-button--orange">
+                <div id="clear" onclick="buttonPress(this.id)" class="push-button push-button--orange">
                     <p class="button-text button-text--small">C-CE</p>
                 </div>
-                <div class="push-button">
+                <div id="plusMinus" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text-small">+/-</p>
                 </div>
-                <div class="push-button">
+                <div id="root" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text-small">&#8730</p>
                 </div>
-                <div class="push-button">
-                    <p class=" button-text button-text-small">%</p>
+                <div id="percent" onclick="buttonPress(this.id)" class="push-button">
+                    <p class="button-text button-text-small">%</p>
                 </div>
-                <div class="push-button">
+                <div id="recall" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text-small">MRC</p>
                 </div>
-                <div class="push-button">
+                <div id="memMinus" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text-small">M-</p>
                 </div>
-                <div class="push-button">
+                <div id="mem-Plus" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text-small">M+</p>
                 </div>
-                <div class="push-button">
+                <div id="division" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">&#xF7</p>
                 </div>
-                <div class="push-button">
+                <div id="7" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">7</p>
                 </div>
-                <div class="push-button">
+                <div id="8" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">8</p>
                 </div>
-                <div class="push-button">
+                <div id="9" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">9</p>
                 </div>
-                <div class="push-button">
+                <div id="multiply" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">x</p>
                 </div>
-                <div class="push-button">
+                <div id="4" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">4</p>
                 </div>
-                <div class="push-button">
+                <div id="5" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">5</p>
                 </div>
-                <div class="push-button">
+                <div id="6" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">6</p>
                 </div>
-                <div class="push-button">
+                <div id="minus" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">-</p>
                 </div>
-                <div class="push-button">
+                <div id="1" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">1</p>
                 </div>
-                <div class="push-button">
+                <div id="2" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">2</p>
                 </div>
-                <div class="push-button">
+                <div id="3" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">3</p>
                 </div>
-                <div class="push-button push-button--large">
+                <div id="plus" onclick="buttonPress(this.id)"class="push-button push-button--large">
                     <p class="button-text button-text--medium">+</p>
                 </div>
-                <div class="push-button">
+                <div id="zero" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">0</p>
                 </div>
-                <div class="push-button">
+                <div id="dot" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">.</p>
                 </div>
-                <div class="push-button">
+                <div id="equals" onclick="buttonPress(this.id)" class="push-button">
                     <p class="button-text button-text--medium">=</p>
                 </div>
             </div>
