@@ -170,14 +170,14 @@ body {
 }
 
 .button-text {
-  font-size: 34px;
   cursor: pointer;
   font-family: "Grape Nuts", cursive;
   font-family: "Lato", sans-serif;
   text-align: center;
   &--small {
-    font-family: "Grape Nuts", cursive;
-    font-family: "Lato", sans-serif;
     font-size: 20px;
+  }
+  &--medium {
+    font-size: 34px;
   }
 }
