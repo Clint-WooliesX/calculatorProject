@@ -43,7 +43,8 @@ let
   temp = ["", "", ""],
   isPositive = true,
   decimalActive = false,
-  decimalCount = 0;
+  decimalCount = 0,
+  subTotal=0;
 
 
 // begin program
@@ -55,7 +56,7 @@ const begin = (key) => {
 
 const validation = (key) => {
   if (Object.keys(operator).includes(key)) {
-    console.log("special key was pressed");
+    debug("special key was pressed");
     switch (key) {
       case "clear": return clear();
       case "recall": return recall();
@@ -70,12 +71,12 @@ const validation = (key) => {
       case "division": return key = "/";
       case "multiply": return key = "*";
       case "subtraction": return key = "-";
-      case "addition": return key = "+";
-      default: return console.log("something went wrong");
+      case "addition": return additionKey();
+      default: return debug("something went wrong");
     }
   }
   if (temp[1].length >= maxCharacters) {
-    console.log("Max character count reached key not stored " + key);
+    debug("Max character count reached key not stored " + key);
     return;
   }
   tempStorage(key);
@@ -131,13 +132,13 @@ const percent = () => {
 };
 
 const equals = () => {
-  //do something
+  stringToNumber(temp);
   return;
 };
 
 const zeroCheck = () => {
   if (temp[1] != "") {
-    console.log("this has been run");
+    debug("this has been run");
     key = "0";
     validation(key);
   }
@@ -146,7 +147,7 @@ const zeroCheck = () => {
 
 const tempStorage = (value) => {
   temp[1] = temp[1] + value;
-  console.log(temp[1]);
+  debug(temp[1]);
   updateDisplay(temp[1]);
 };
 
@@ -187,7 +188,7 @@ const updateDisplay = (value) => {
 
 
 const dot = () => {
-  console.log("dot has been run");
+  debug("dot has been run");
   if (decimalActive === false) {
     decimalActive = true;
     if (temp[1] === "") {
@@ -241,3 +242,16 @@ const lengthOf = (string) => {
   const error = "error";
   return error;
 };
+
+const stringToNumber = (array) => {
+debug('received '+array+' of length '+array.length)
+  const string =array[0] + array[1] + array[2];
+  debug(string);
+  strToNum = parseFloat(string);
+  debug(strToNum);
+  storeSubTotal(strToNum)
+};
+
+const storeSubTotal = (value)=>{
+  subTotal=value;
+}
