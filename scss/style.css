@@ -71,7 +71,6 @@ body {
   border-bottom-right-radius: 30px;
   box-shadow: 1px 2px 2px black, -1px -1px 2px black;
 }
-
 .grooves--divider {
   position: absolute;
   left: 20px;
@@ -120,24 +119,20 @@ body {
   height: 65px;
   margin: 0;
 }
-
 .num-input--commas {
   position: absolute;
   letter-spacing: 5px;
   right: -5.5px;
 }
-
 .num-input__indicators {
   position: absolute;
   display: none;
 }
-
 .num-input__indicators--smallR {
   display: none;
   right: -5px;
   font-size: 25px;
 }
-
 .num-input__indicators--smallL {
   display: none;
   text-align: left;
@@ -183,19 +178,16 @@ body {
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
   cursor: pointer;
 }
-
 .push-button--orange {
   background-color: #eaa22c;
   box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.35), inset -2px -2px 2px rgba(155, 155, 155, 0.35);
 }
-
 .push-button--large {
   margin: 0px;
   background-color: #2a2827;
   grid-column: 4;
   grid-row: 5/span 2;
 }
-
 .push-button:active {
   color: rgb(215, 215, 215);
   border: 1px inset black;
@@ -208,11 +200,9 @@ body {
   font-family: "Lato", sans-serif;
   text-align: center;
 }
-
 .button-text--small {
   font-size: 20px;
 }
-
 .button-text--medium {
   font-size: 34px;
 }
