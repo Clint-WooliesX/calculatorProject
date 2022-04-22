@@ -2,6 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  //prevent user selecting text on buttons
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 @font-face {
@@ -119,22 +127,22 @@ body {
   //   }
   &--commas {
     position: absolute;
-    display:none;
+    display: none;
     letter-spacing: 5px;
     right: -5.5px;
   }
   &__indicators {
     position: absolute;
-    display:none;
+    display: none;
 
     &--smallR {
-      display:none;
+      display: none;
       right: -5px;
       font-size: 25px;
     }
     &--smallL {
-      display:none;
-        text-align: left;
+      display: none;
+      text-align: left;
       left: -3.5px;
       font-size: 60px;
     }

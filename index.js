@@ -7,6 +7,7 @@ const operator = {
   root: "&#8730",
   equals: "=",
   dot: ".",
+  zero: "0",
   recall: "",
   memPlus: "",
   memMinus: "",
@@ -14,19 +15,6 @@ const operator = {
   plusMinus: "",
   doNothing: "",
 };
-
-
-specialKeys = [];
-const operatorKeys = (array) => {
-  let i = 0;
-  for (let value of Object.keys(operator)) {
-    specialKeys[i] = value;
-    i++;
-  }
-  console.log(specialKeys);
-};
-
-operatorKeys(operator);
 
 const commas = {
   thousand: ",&nbsp;&nbsp;&nbsp;",
@@ -46,14 +34,15 @@ let characterCount = 0,
   decimalActive = false;
 
 const begin = (key) => {
-  play();
-  buttonPress(key);
+  soundFx();
+  validation(key);
 };
-const buttonPress = (key) => {
 
-  if (key === "zero") key = 0;
+
+const validation = (key) => {
+  if (key === "zero") zeroCheck();
   if (key === "dot") dot();
-  if (specialKeys.includes(key)) {
+  if (Object.keys(operator).includes(key)) {
     console.log("special key was pressed");
     if (key === "clear") {
       clear();
@@ -65,14 +54,11 @@ const buttonPress = (key) => {
     console.log("Max character count reached key not stored " + key);
     return;
   }
-
-  characterCount++;
-  console.log("chars = " + characterCount + " key =" + key);
   tempStorage(key);
-  ;
 };
 
 const tempStorage = (value) => {
+  characterCount++;
   tempString = tempString + value;
   console.log(tempString);
   updateDisplay(tempString);
@@ -90,20 +76,30 @@ const clear = () => {
   tempString = "";
 };
 
-const play = () => {
+const soundFx = () => {
   var audio = new Audio('soundfx.m4a');
   audio.play();
 };
+
 const dot = () => {
   console.log("dot has been run");
   if (decimalActive === false) {
     decimalActive = true;
     if (tempString === "") {
       characterCount = 1;
-      return buttonPress("0.");
+      return validation("0.");
     }
-    return buttonPress(".");
+    return validation(".");
   }
   ;
   return;
 };
+
+const zeroCheck = () =>{
+  if(tempString != ""){
+    console.log("this has been run")
+    key="0"
+    validation(key)
+  }
+  return
+}
