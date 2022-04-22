@@ -1,6 +1,6 @@
 # JavaScript Calculator Project
 
-![Calculator images](/CalcPics.png "Calculator project")
+![Calculator images](/media/CalcPics.png "Calculator project")
 
 ## MVP
 * Functioning calculator coded using java script
