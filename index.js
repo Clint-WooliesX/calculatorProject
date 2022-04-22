@@ -45,6 +45,7 @@ let
   decimalActive = false,
   decimalCount = 0,
   subTotal=0;
+  lastSubTotal=0;
 
 
 // begin program
