@@ -1,3 +1,13 @@
+const soundFx = () => {
+  var audio = new Audio('soundFx.m4a');
+  audio.play();
+};
+
+const debug = (message) => { console.log(message); };
+
+debug("Calculator App Started");
+debug("Waiting for key press...");
+
 const operator = {
   addition: "+",
   subtraction: "-",
@@ -27,66 +37,140 @@ const commas = {
 
 const maxCharacters = 8;
 
-let characterCount = 0,
-  decimalCount = 0,
+let
   storageIndex = 0,
-  tempString = "",
-  decimalActive = false;
+  temp = ["", "", ""],
+  isPositive = true,
+  decimalActive = false,
+  decimalCount = 0;
 
+
+// begin program
 const begin = (key) => {
+  debug("key press detected, validating");
   soundFx();
-  validation(key);
+  validation(key); // validate key press
 };
 
-
 const validation = (key) => {
-  if (key === "zero") zeroCheck();
-  if (key === "dot") dot();
   if (Object.keys(operator).includes(key)) {
     console.log("special key was pressed");
-    if (key === "clear") {
-      clear();
-      return;
+    switch (key) {
+      case "clear": return clear();
+      case "recall": return recall();
+      case "memMinus": return memMinus();
+      case "memPlus": return memPlus();
+      case "plusMinus": return plusMinus();
+      case "root": return root();
+      case "percent": return percent();
+      case "equals": return equals();
+      case "zero": return zeroCheck();
+      case "dot": return dot();
+      case "division": return key = "/";
+      case "multiply": return key = "*";
+      case "subtraction": return key = "-";
+      case "addition": return key = "+";
+      default: return console.log("something went wrong");
     }
-    return;
   }
-  if (characterCount >= 8) {
+  if (temp[1].length >= maxCharacters) {
     console.log("Max character count reached key not stored " + key);
     return;
   }
   tempStorage(key);
 };
 
+
+const clear = () => {
+  temp[1] = "0";
+  decimalActive = false;
+  updateDisplay(temp[1]);
+  temp[1] = "";
+  document.getElementById("LCDcommas").innerHTML = "";
+};
+
+const recall = () => {
+  //do something
+  return;
+};
+
+const memMinus = () => {
+  //do something
+  return;
+};
+
+const memPlus = () => {
+  //do something
+  return;
+};
+
+const plusMinus = () => {
+  debug("plusMinus function called");
+  if (isPositive) {
+    debug("isPositive test was true");
+    temp[0] = "-";
+    isPositive = false;
+    document.getElementById("LCDnegative").style = "display: flex;";
+    return;
+  }
+  debug("isPositive test was false");
+  temp[0] = "";
+  isPositive = true;
+  document.getElementById("LCDnegative").style.display = "none";
+};
+
+const root = () => {
+  //do something
+  return;
+};
+
+const percent = () => {
+  //do something
+  return;
+};
+
+const equals = () => {
+  //do something
+  return;
+};
+
+const zeroCheck = () => {
+  if (temp[1] != "") {
+    console.log("this has been run");
+    key = "0";
+    validation(key);
+  }
+  return;
+};
+
 const tempStorage = (value) => {
-  characterCount++;
-  tempString = tempString + value;
-  console.log(tempString);
-  updateDisplay(tempString);
+  temp[1] = temp[1] + value;
+  console.log(temp[1]);
+  updateDisplay(temp[1]);
 };
 
 const updateDisplay = (value) => {
   document.getElementById("LCDnumbers").innerHTML = value;
+  switch (lengthOf(temp[1])) {
+    case 4: {
+      document.getElementById("LCDcommas").innerHTML = commas.thousand;
+      break;
+    }
+    case 7: {
+      document.getElementById("LCDcommas").innerHTML = commas.million;
+      break;
+    };
+      document.getElementById("LCDcommas").innerHTML = "";
+  }
 };
 
-const clear = () => {
-  tempString = "0";
-  characterCount = 0;
-  decimalActive = false;
-  updateDisplay(tempString);
-  tempString = "";
-};
-
-const soundFx = () => {
-  var audio = new Audio('soundfx.m4a');
-  audio.play();
-};
 
 const dot = () => {
   console.log("dot has been run");
   if (decimalActive === false) {
     decimalActive = true;
-    if (tempString === "") {
-      characterCount = 1;
+    if (temp[1] === "") {
+      // characterCount = 1;
       return validation("0.");
     }
     return validation(".");
@@ -95,11 +179,14 @@ const dot = () => {
   return;
 };
 
-const zeroCheck = () =>{
-  if(tempString != ""){
-    console.log("this has been run")
-    key="0"
-    validation(key)
+const lengthOf = (string) => {
+  let theLength = 0;
+  for (char in string) {
+    if(char=="."){
+      return theLength
+    }
+    theLength++;
   }
-  return
-}
+  debug(theLength);
+  return theLength
+};
