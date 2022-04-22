@@ -27,13 +27,13 @@ const operator = {
 };
 
 const commas = {
-  thousand: ",&nbsp;&nbsp;&nbsp;",
-  million: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;",
-  thousandDot: ",&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand1dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand2dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand3dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand4dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand        : ",&nbsp;&nbsp;&nbsp;",
+  million         : ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;",
+  thousandDot     : ",&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand1dp     : ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand2dp     : ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand3dp     : ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand4dp     : ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
 };
 
 const maxCharacters = 8;
@@ -122,20 +122,7 @@ const plusMinus = () => {
   document.getElementById("LCDnegative").style.display = "none";
 };
 
-const root = () => {
-  //do something
-  return;
-};
 
-const percent = () => {
-  //do something
-  return;
-};
-
-const equals = () => {
-  stringToNumber(temp);
-  return;
-};
 
 const zeroCheck = () => {
   if (temp[1] != "") {
@@ -212,7 +199,7 @@ const lengthOf = (string) => {
   }
   let digits = [count, (string.length - (count))];
 
-  if (digits[0] == 4 && digits[1] == 0) {
+  if (digits[0] >=4 && digits[0] <7 && digits[1] == 0) {
     const result = "thousand";
     return result;
   }
@@ -256,3 +243,19 @@ debug('received '+array+' of length '+array.length)
 const storeSubTotal = (value)=>{
   subTotal=value;
 }
+
+
+const root = () => {
+  //do something
+  return;
+};
+
+const percent = () => {
+  //do something
+  return;
+};
+
+const equals = () => {
+  stringToNumber(temp);
+  return;
+};
