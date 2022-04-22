@@ -29,10 +29,11 @@ const operator = {
 const commas = {
   thousand: ",&nbsp;&nbsp;&nbsp;",
   million: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;",
-  thousand1dp: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand2dp: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand3dp: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-  thousand4dp: ",&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousandDot: ",&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand1dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand2dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand3dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+  thousand4dp: ",&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
 };
 
 const maxCharacters = 8;
@@ -152,15 +153,35 @@ const tempStorage = (value) => {
 const updateDisplay = (value) => {
   document.getElementById("LCDnumbers").innerHTML = value;
   switch (lengthOf(temp[1])) {
-    case 4: {
+    case "thousand": {
       document.getElementById("LCDcommas").innerHTML = commas.thousand;
       break;
     }
-    case 7: {
+    case "million": {
       document.getElementById("LCDcommas").innerHTML = commas.million;
       break;
     };
-      document.getElementById("LCDcommas").innerHTML = "";
+    case "thousandDot": {
+      document.getElementById("LCDcommas").innerHTML = commas.thousandDot;
+      break;
+    };
+    case "thousand1dp": {
+      document.getElementById("LCDcommas").innerHTML = commas.thousand1dp;
+      break;
+    };
+    case "thousand2dp": {
+      document.getElementById("LCDcommas").innerHTML = commas.thousand2dp;
+      break;
+    };
+    case "thousand3dp": {
+      document.getElementById("LCDcommas").innerHTML = commas.thousand3dp;
+      break;
+    };
+    case "thousand4dp": {
+      document.getElementById("LCDcommas").innerHTML = commas.thousand3dp;
+      break;
+    };
+
   }
 };
 
@@ -180,13 +201,43 @@ const dot = () => {
 };
 
 const lengthOf = (string) => {
-  let theLength = 0;
+  let count = 0;
   for (char in string) {
-    if(char=="."){
-      return theLength
-    }
-    theLength++;
+    if (string[char] == ".") {
+      break;
+    };
+    count++;
   }
-  debug(theLength);
-  return theLength
+  let digits = [count, (string.length - (count))];
+
+  if (digits[0] == 4 && digits[1] == 0) {
+    const result = "thousand";
+    return result;
+  }
+  if (digits[0] == 7 && digits[1] == 0) {
+    const result = "million";
+    return result;
+  }
+  if (digits[0] == 4 && digits[1] == 1) {
+    const result = "thousandDot";
+    return result;
+  }
+  if (digits[0] == 4 && digits[1] == 2) {
+    const result = "thousand1dp";
+    return result;
+  }
+  if (digits[0] == 4 && digits[1] == 3) {
+    const result = "thousand2dp";
+    return result;
+  }
+  if (digits[0] == 4 && digits[1] == 4) {
+    const result = "thousand3dp";
+    return result;
+  }
+  if (digits[0] == 4 && digits[1] == 4) {
+    const result = "thousand3dp";
+    return result;
+  }
+  const error = "error";
+  return error;
 };
