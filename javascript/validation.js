@@ -12,8 +12,8 @@ const validation = (key) => {
             case "root": return root();
             case "percent": return percent();
             case "equals": return equals();
-            case "zero": return zeroCheck();
-            case "dot": return dot();
+            case "0": return zeroCheck();
+            case ".": return dot();
             case "division": return key = "/";
             case "multiply": return key = "*";
             case "subtraction": return key = "-";

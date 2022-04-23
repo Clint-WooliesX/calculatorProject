@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/scss/style.css">
-    <script src="/javascript/variables.js"></script>
+    <!-- <script src="/javascript/variables.js"></script>
     <script src="/javascript/inWork.js"></script>
     <script src="/javascript/supportFunctions.js"></script>
     <script src="/javascript/validation.js"></script>
     <script src="/javascript/functionKeys.js"></script>
-    <script src="/javascript/display.js"></script>
+    <script src="/javascript/display.js"></script> -->
     <script src="/javascript/index.js" defer></script>
     <title>Calculator Project</title>
 </head>
@@ -27,84 +27,39 @@
             <p id="LCDnumbers" class="num-input">0</p>
             <p id="LCDcommas" class="num-input num-input--commas"></p>
             <div class="num-input num-input__indicators--smallR">
-                <p id="LCDmem"></p>m</p>
-                <p id="LCDoperator">%</p>
+                <p id="LCDmem"></p></p>     <!--LCD Memory indicator-->
+                <p id="LCDoperator"></p>    <!--LCD Operator indicator-->
             </div>
             <div id="LCDnegative" class="num-input num-input__indicators--smallL">
-                <p>-</p>
+                <p>-</p> <!--LCD Operator indicator-->
             </div>
         </div>
         <div class="buttons">
             <div class="buttons--grid">
-                <div id="clear" onclick="begin(this.id)" class="push-button push-button--orange">
-                    <p class="button-text button-text--small">C-CE</p>
-                </div>
-                <div id="plusMinus" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">+/-</p>
-                </div>
-                <div id="root" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">&#8730</p>
-                </div>
-                <div id="percent" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">%</p>
-                </div>
-                <div id="recall" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">MRC</p>
-                </div>
-                <div id="memMinus" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">M-</p>
-                </div>
-                <div id="memPlus" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text-small">M+</p>
-                </div>
-                <div id="division" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">&#xF7</p>
-                </div>
-                <div id="7" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">7</p>
-                </div>
-                <div id="8" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">8</p>
-                </div>
-                <div id="9" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">9</p>
-                </div>
-                <div id="multiply" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">x</p>
-                </div>
-                <div id="4" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">4</p>
-                </div>
-                <div id="5" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">5</p>
-                </div>
-                <div id="6" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">6</p>
-                </div>
-                <div id="subtraction" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">-</p>
-                </div>
-                <div id="1" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">1</p>
-                </div>
-                <div id="2" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">2</p>
-                </div>
-                <div id="3" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">3</p>
-                </div>
-                <div id="addition" onclick="begin(this.id)" class="push-button push-button--large">
-                    <p class="button-text button-text--medium">+</p>
-                </div>
-                <div id="zero" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">0</p>
-                </div>
-                <div id="dot" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">.</p>
-                </div>
-                <div id="equals" onclick="begin(this.id)" class="push-button">
-                    <p class="button-text button-text--medium">=</p>
-                </div>
+                <div id="cce" onclick="begin(this.id)" class="push-button push-button--small-font push-button--orange">C-CE</div>
+                <div id="plusMinus" onclick="begin(this.id)" class="push-button push-button--small-font">+/-</div>
+                <div id="root" onclick="begin(this.id)" class="push-button push-button--small-font">&#8730</div>
+                <div id="percent" onclick="begin(this.id)" class="push-button push-button--small-font">%</div>
+                <div id="mrc" onclick="begin(this.id)" class="push-button push-button--small-font">MRC</div>
+                <div id="m-" onclick="begin(this.id)" class="push-button push-button--small-font">M-</div>
+                <div id="m+" onclick="begin(this.id)" class="push-button push-button--small-font">M+</div>
+                <div id="division" onclick="begin(this.id)" class="push-button push-button--medium-font">&#xF7</div>
+                <div id="seven" onclick="begin(this.id)" class="push-button push-button--medium-font">7</div>
+                <div id="eight" onclick="begin(this.id)" class="push-button push-button--medium-font">8</div>
+                <div id="nine" onclick="begin(this.id)" class="push-button push-button--medium-font">9</div>
+                <div id="multiply" onclick="begin(this.id)" class="push-button push-button--medium-font">x</div>
+                <div id="four" onclick="begin(this.id)" class="push-button push-button--medium-font">4</div>
+                <div id="five" onclick="begin(this.id)" class="push-button push-button--medium-font">5</div>
+                <div id="six" onclick="begin(this.id)" class="push-button push-button--medium-font">6</div>
+                <div id="subtraction" onclick="begin(this.id)" class="push-button push-button--medium-font">-</div>
+                <div id="one" onclick="begin(this.id)" class="push-button push-button--medium-font">1</div>
+                <div id="two" onclick="begin(this.id)" class="push-button push-button--medium-font">2</div>
+                <div id="three" onclick="begin(this.id)" class="push-button push-button--medium-font">3</div>
+                <div id="addition" onclick="begin(this.id)"
+                    class="push-button push-button--large push-button--medium-font">+</div>
+                <div id="zero" onclick="begin(this.id)" class="push-button push-button--medium-font">0</div>
+                <div id="decimal" onclick="begin(this.id)" class="push-button push-button--medium-font">.</div>
+                <div id="equals" onclick="begin(this.id)" class="push-button push-button--medium-font">=</div>
             </div>
         </div>
     </div>

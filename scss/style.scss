@@ -133,10 +133,8 @@ body {
   }
   &__indicators {
     position: absolute;
-    display: none;
 
     &--smallR {
-      display: none;
       right: -5px;
       font-size: 25px;
     }
@@ -178,6 +176,9 @@ body {
   width: 100%;
   height: 100%;
   color: white;
+  font-family: "Grape Nuts", cursive;
+  font-family: "Lato", sans-serif;
+  text-align: center;
   background-color: #2a2827;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -186,6 +187,12 @@ body {
   border: 3px groove black;
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.286), inset -2px -2px 2px black;
   cursor: pointer;
+  &--small-font {
+    font-size: 20px;
+  }
+  &--medium-font {
+    font-size: 34px;
+  }
   &--orange {
     background-color: #eaa22c;
     box-shadow: inset 2px 2px 2px rgba(155, 155, 155, 0.35),
@@ -204,15 +211,15 @@ body {
   }
 }
 
-.button-text {
-  cursor: pointer;
-  font-family: "Grape Nuts", cursive;
-  font-family: "Lato", sans-serif;
-  text-align: center;
-  &--small {
-    font-size: 20px;
-  }
-  &--medium {
-    font-size: 34px;
-  }
-}
+// .button-text {
+//   cursor: pointer;
+//   font-family: "Grape Nuts", cursive;
+//   font-family: "Lato", sans-serif;
+//   text-align: center;
+//   &--small-font {
+//     font-size: 20px;
+//   }
+//   &--medium-font {
+//     font-size: 34px;
+//   }
+// }
