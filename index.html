@@ -10,7 +10,19 @@
     <title>Calculator Project</title>
 </head>
 
+
+
 <body>
+
+    <div id="debugmode" class="debugmode">
+        <div class="debug" id="input">devMode: on</div>
+        <div class="debug" id="input">input=0</div>
+        <div class="debug" id="tempInput">tempInput=0</div>
+        <div class="debug" id="inputArray">inputArr=0, 0</div>
+        <div class="debug" id="index">index=0</div>
+        <div class="debug" id="currentOperator">currentOperator=</div>
+    </div>
+
     <div class="mask">
         <div class="calc-case">
         </div>
@@ -21,16 +33,20 @@
             <p id="LCDnumbers" class="num-input">0</p>
             <p id="LCDcommas" class="num-input num-input--commas"></p>
             <div class="num-input num-input__indicators--smallR">
-                <p id="LCDmemory">&nbsp;</p>     <!--LCD Memory indicator-->
-                <p id="LCDoperator">&nbsp;</p>    <!--LCD Operator indicator-->
+                <p id="LCDmemory">&nbsp;</p>
+                <!--LCD Memory indicator-->
+                <p id="LCDoperator">&nbsp;</p>
+                <!--LCD Operator indicator-->
             </div>
             <div id="LCDnegative" class="num-input num-input__indicators--smallL">
-                <p>-</p> <!--LCD Operator indicator-->
+                <p>-</p>
+                <!--LCD Operator indicator-->
             </div>
         </div>
         <div class="buttons">
             <div class="buttons--grid">
-                <div id="cce" onclick="begin(this.id)" class="push-button push-button--small-font push-button--orange">C-CE</div>
+                <div id="cce" onclick="begin(this.id)" class="push-button push-button--small-font push-button--orange">
+                    C-CE</div>
                 <div id="plusMinus" onclick="begin(this.id)" class="push-button push-button--small-font">+/-</div>
                 <div id="root" onclick="begin(this.id)" class="push-button push-button--small-font">&#8730</div>
                 <div id="percent" onclick="begin(this.id)" class="push-button push-button--small-font">%</div>

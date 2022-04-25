@@ -21,6 +21,21 @@
   font-family: "myFirstFont";
   src: url(/media/digital.ttf);
 }
+.debugmode {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+  width: 100%;
+}
+
+.debug {
+  display: flex;
+}
+
 body {
   background-image: url(/media/wood.jpg);
   background-size: cover;
