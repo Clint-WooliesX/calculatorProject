@@ -1,7 +1,7 @@
 
 const fButtons = ["cce", 'plusMinus', 'root', 'percent', 'mrc', 'm-', 'm+', 'division', 'multiply', 'subtraction', 'addition', 'equals'];
 
-let tempData = '', lastSubTotal = 0, subTotal = 0, errorState = false;
+let tempData = '', Data = 0, userNum = [], index = 0, currentFunction, errorState = false;
 
 const lcd = (arg) => {
   switch (arg) {
@@ -20,6 +20,8 @@ const lcd = (arg) => {
   }
 };
 
+console.log("Data=", Data, "tempData=", tempData, 'userNum 0:', userNum[0], 'userNum 1:', userNum[1], 'index:', index);
+
 // begin program
 //--------------------------//
 const begin = (button) => {
@@ -28,6 +30,7 @@ const begin = (button) => {
   let input = document.getElementById(button).innerHTML;
   console.log(button, input);
   if (fButtons.includes(button) === false) recordInput(input);
+  Data=parseFloat(tempData)
   functionButton(button, input);
 };
 
@@ -39,19 +42,53 @@ const recordInput = (input) => {
   if (tempData.length >= 8) return console.log('screen capacity exceeded');
   tempData = tempData + input;
   updateDisplay(tempData);
-  return;
 };
 
 // Function buttons
 //--------------------------//
 const functionButton = (button, input) => {
+  // Data = parseFloat(tempData);
+  userNum[index] = Data;
+  index++;
+
   switch (button) {
     case "cce": return clear();
-    case "addition": return addition();
-    case "subtraction": return subtraction();
-    case "equals": return equals();
+    case "addition":
+      lcd('+');
+      currentFunction = '+';
+      break;
+    case "subtraction":
+      lcd('-');
+      currentFunction = '-';
+      break;
+    case "multiply":
+      lcd('*');
+      currentFunction = '*';
+      break;
+    case "division":
+      lcd('/');
+      currentFunction = '/';
+      break;
   }
-  return;
+  tempData = '';
+  if (index == 2) {
+    index = 0;
+    switch (currentFunction) {
+      case '+':
+        result = userNum[0] + userNum[1];
+        return updateDisplay(result);
+      case '-':
+        result = userNum[0] + userNum[1];
+        return updateDisplay(result);
+      case '*':
+        result = userNum[0] + userNum[1];
+        return updateDisplay(result);
+      case '/':
+        result = userNum[0] + userNum[1];
+        return updateDisplay(result);
+    }
+
+  }
 };
 
 
@@ -59,18 +96,8 @@ const functionButton = (button, input) => {
 //--------------------------//
 const clear = () => {
   console.log('$$$$$');
-  lcd('memOff');
-  if (tempData.length > 0) {
-    subTotal = lastSubTotal;
-    lastSubTotal = 0;
-  } else {
-    if (lastSubTotal == 0) {
-      subTotal = 0;
-    }
-  }
   if (tempData === '') {
-    lastSubTotal = 0;
-    subTotal = 0;
+    Data = 0;
   }
   tempData = '';
   lcd('opOff');
@@ -81,66 +108,83 @@ const clear = () => {
 
 // Addition button
 //--------------------------//
-const addition = () => {
-  console.log('+ function start');
+// const addition = () => {
 
-  if (isNaN(parseFloat(tempData))) {
-    console.log('addition indicator on');
-    lcd('+');
-    return;
-  }
-  console.log('addition indicator on');
-  lcd('+');
-  subTotal = subTotal + parseFloat(tempData);
-  lastSubTotal = subTotal;
-  tempData = '';
-  updateDisplay(subTotal);
-  return;
-};
+//   console.log('+ function start');
+//   lcd('+');
 
-// subtraction button
+//   if (isNaN(parseFloat(tempData))) {
+//     updateDisplay(subTotal)
+//     return;
+//   }
+
+//   lcd('+'); 
+//   subTotal = subTotal + lastSubTotal;
+//   lastSubTotal = parseFloat(tempData);
+//   tempData = '';
+//   updateDisplay(subTotal);
+// };
+
+// operation button
 //--------------------------//
-const subtraction = () => {
-  console.log('- function start');
-  if (isNaN(parseFloat(tempData))) {
-    console.log('addition indicator -');
-    lcd('-');
-    return;
-  }
-  console.log('subtraction indicator on');
-  lcd('+');
-  subTotal = subTotal - parseFloat(tempData);
-  lastSubTotal = subTotal;
-  tempData = '';
-  updateDisplay(subTotal);
-  return;
-};
+// const operation = (arg) => {
+
+//   console.log('+ function start');
+//   lcd(arg);
+
+//   if (isNaN(parseFloat(tempData))) {
+//     updateDisplay(Data);
+//     return;
+//   }
+
+//   switch (arg) {
+//     case '+':
+//       lastSubTotal = parseFloat(tempData);
+//       subTotal = subTotal + lastSubTotal;
+//       break;
+//     case '-':
+//       lastSubTotal = parseFloat(tempData);
+//       subTotal = subTotal - lastSubTotal;
+//       break;
+//     case '*':
+//       lastSubTotal = parseFloat(tempData);
+//       subTotal = subTotal * lastSubTotal;
+//       break;
+//     case '/':
+//       lastSubTotal = parseFloat(tempData);
+//       subTotal = subTotal / lastSubTotal;
+//       break;
+//   }
+
+//   tempData = '';
+//   updateDisplay(subTotal);
+// };
 
 
 // Equals function
 //--------------------------//
-const equals = () => {
-  if (tempData === '') {
-    tempData = subTotal;
-    tempData = '';
-    updateDisplay(subTotal);
-  }
-  if (tempData.length > 0) {
-    subTotal = subTotal + parseFloat(tempData);
-    tempData = '';
-    lcd('opOff');
-    updateDisplay(subTotal);
-  }
-};
+// const equals = () => {
+//   if (tempData === '') {
+//     tempData = subTotal;
+//     tempData = '';
+//     updateDisplay(subTotal);
+//   }
+//   if (tempData.length > 0) {
+//     subTotal = subTotal + parseFloat(tempData);
+//     tempData = '';
+//     lcd('opOff');
+//     updateDisplay(subTotal);
+//   }
+// };
 
 // Update LCD display
 //--------------------------//
 const updateDisplay = (value) => {
-  console.log('test value length');
   if (value.toString().length >= 9) {
-    value = 'ERROR'; errorState = true; }
-  if (tempData === '' && subTotal === 0) value = 0;
+    value = 'ERROR'; errorState = true;
+  }
+  if (tempData === '' && Data === 0) value = 0;
   document.getElementById('LCDnumbers').innerHTML = value;
-  console.log("sub-total=", subTotal, "last-sub-total=", lastSubTotal, "tempData=", tempData);
+  console.log("Data=", Data, "tempData=", tempData, 'userNum 0:', userNum[0], 'userNum 1:', userNum[1], 'index:', index);
   return;
 };
