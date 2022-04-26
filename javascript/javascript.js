@@ -17,137 +17,61 @@ const lcd = (arg) => {
     }
 };
 
-//global variables
-let
-    tempInput = '',
-    input,
-    inputArray = [0, 0],
-    index = 0,
-    errorState = false,
-    currentFunction;
-lastInput = 0;
+
+let buttonInputs = [], concatData; equation = [];
 
 const debug = () => {
-    document.getElementById("tempInputValue").innerHTML=tempInput;
-    document.getElementById("inputValue").innerHTML=tempInput
-    htmlArrayValue = document.getElementById("arrayValue").innerHTML=inputArray
-    htmlIndexValue = document.getElementById("indexValue").innerHTML=index
-    document.getElementById("operatorValue").innerHTML=currentFunction
+    document.getElementById('concatD').innerHTML = concatData;
+    document.getElementById('arrayValue').innerHTML = equation;
+
 };
 
-debug();
-// begin program
-//--------------------------//
-const begin = (button) => {
-    debug();
+const buttonInput = (input) => {
+    //Input from HTML
+    let button = document.getElementById(input).innerHTML;
 
-    console.log(button);
-
-    //element ID cannot be a number so innHTML is used
-    buttonDigit = document.getElementById(button).innerHTML;
-
-    //prevent user input until error cleared
-    if (errorState === true && button != 'cce') return;
-    errorState = false;
-    input = parseFloat(tempInput);
-    //check if button was an operator or function button
-    if (fButtons.includes(button) === false) return recordInput(buttonDigit);
-    functionButton(button);
-};
-
-// Record input from user
-//--------------------------//
-const recordInput = (arg) => {
     //validation
-    if (isNaN(parseFloat(tempInput))) input = lastInput;
-    if (tempInput === '0' && input != '.') return;
-    if (tempInput.length === 0 && input === '.') input = '0.';
-    if (tempInput.length >= 8) return console.log('screen capacity exceeded');
-    tempInput = tempInput + arg;
-    updateLCD(tempInput);
-};
+    if (fButtons.includes(input)) {
+        switch (input) {
+            case 'cce': return cce();
+            case 'addition': return storeConcatData(concatData);
+        }
+    };
+    if (button === '0') return;
+    if (button === '.') button = '0.';
+    if (buttonInputs.length <= 7) buttonInputs.push(button);
 
-// Update LCD display
-//--------------------------//
-const updateLCD = (arg) => {
-    input = parseFloat(tempInput);
-    //equation result larger longer than 8 digits cannot be displayed
-    if (arg.toString().length >= 9) {
-        arg = 'ERROR'; errorState = true;
-    }
-    //update calculator display with new data
-    document.getElementById('LCDnumbers').innerHTML = arg;
+    concatData = buttonInputs.join("");
+    if (isNaN(concatData) != true) updateLCD(concatData);
 
     debug();
-    return;
 };
 
-// clear - clear all button
-//--------------------------//
-const clear = () => {
-    if (tempInput === '') {
-        Data = 0;
-    }
-    tempInput = '';
-    inputArray = [0, 0];
-    index = 0;
-    lcd('opOff');
-    lcd('memOff');
-    updateLCD(0);
-    return;
+const updateLCD = (argument) => {
+    document.getElementById('LCDnumbers').innerHTML = argument;
+    debug();
 };
 
-const functionButton = (button) => {
-    if (isNaN(parseFloat(tempInput))) input = lastInput;
-    inputArray[index] = input;
-    index++;
-
-    switch (button) {
-        case "cce": return clear();
-        case "addition":
-            lcd('+');
-            currentFunction = '+';
-            break;
-        case "subtraction":
-            lcd('-');
-            currentFunction = '-';
-            break;
-        case "multiply":
-            lcd('*');
-            currentFunction = '*';
-            break;
-        case "division":
-            lcd('/');
-            currentFunction = '/';
-            break;
+const cce = () => {
+    buttonInputs = [];
+    concatData = '0';
+    debug();
+    if (equation.length > 0) {
+        updateLCD(equation[0]);
+        equation.pop();
     }
+    updateLCD(concatData);
+    debug();
+};
 
-    if (index == 2) {
-        index = 0;
-        switch (currentFunction) {
-            case '+':
-                result = inputArray[0] + inputArray[1];
-                inputArray[0] = result;
-                tempInput = '';
-                index=1
-                return updateLCD(result);
-            case '-':
-                result = inputArray[0] - inputArray[1];
-                inputArray[0] = result;
-                tempInput = '';
-                index=1
-                return updateLCD(result);
-            case '*':
-                result = inputArray[0] * inputArray[1];
-                return updateLCD(result);
-            case '/':
-                result = inputArray[0] / inputArray[1];
-                return updateLCD(result);
-        }
-
-    }
-
-    index = 1
-    tempInput = '';
+const storeConcatData = (concatData) => {
+    console.log('storeConcatData has been run');
+    // if (isNaN(concatData) != true) concatData='0';
+    debug();
+    if (equation.length >= 2) equation.shift();
+    debug();
+    equation.push(parseFloat(concatData));
+    buttonInputs = [];
+    concatData = '0';
     debug();
 };
