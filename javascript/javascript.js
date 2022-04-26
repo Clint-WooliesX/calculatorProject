@@ -24,7 +24,7 @@ const lcd = (arg) => {
 };
 
 //global Variables
-let buttonInputs = [], concatData; equation = [], operator = []; index = 0;
+let buttonInputs = [], concatData=''; equation = [], operator = []; index = 0;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -34,14 +34,12 @@ const debug = () => {
     document.getElementById('index').innerHTML = index;
 };
 
+// Collect button inputs
+//----------------------------------------------------------//
 const buttonInput = (input) => {
-    debug();
-    console.log('waiting for input');
-
     //Input from HTML
     let button = document.getElementById(input).innerHTML;
-
-    //validation
+    //validation                       ================> needs optimising
     if (fButtons.includes(input)) {
         switch (input) {
             case 'cce': return cce();
@@ -73,22 +71,24 @@ const buttonInput = (input) => {
             }
         };
     }
+    //prevent leading zeros
     if (button === '0' && parseFloat(concatData) == 0) return;
+    //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
+    //handle value longer than 7 digits
     if (buttonInputs.length <= 7) buttonInputs.push(button);
-
+    //concantenate colected digits into a single number
     concatData = buttonInputs.join("");
     if (isNaN(concatData) != true) updateLCD(concatData);
-
     debug();
 };
 
 // Update LCD
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
-    if (isNaN(argument)) return;
+    if (isNaN(argument)) return; //return if result is NaN
     document.getElementById('LCDnumbers').innerHTML = argument;
-    if (argument != 0) equation[index] = parseFloat(argument);
+    if (argument != 0) equation[index] = parseFloat(argument); // value to equation
     debug();
 };
 
@@ -107,6 +107,7 @@ const cce = () => {
         debug();
         return;
     }
+    //press number 2 clears all
     lcd('opOff');
     operator = [];
     buttonInputs = [];
@@ -121,7 +122,9 @@ const cce = () => {
 // Store Data
 //----------------------------------------------------------//
 const storeConcatData = (concatData) => {
+    //remove old value
     if (equation.length >= 2) equation.pop();
+    //save new value
     if (isNaN(concatData) == false) equation.push(parseFloat(concatData));
     debug();
 };
@@ -138,7 +141,9 @@ const storeOperation = (input) => {
 };
 
 const solveEquation = (input) => {
+    //allow change of operator
     if(isNaN(equation[1])) return operator.shift(input)
+    //solve equation using current operator
     const operation = operator.shift();
     switch (operation) {
         case ('addition'):
