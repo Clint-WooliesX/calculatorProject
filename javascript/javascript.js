@@ -1,5 +1,11 @@
+//turn HTML debug mode on/off
+let debugMode = true;
+if (debugMode == false) document.getElementById('debugMode').style = "display:none";
+
+//List of operation buttons that should not be handled like digits
 const fButtons = ["cce", 'plusMinus', 'root', 'percent', 'mrc', 'm-', 'm+', 'division', 'multiply', 'subtraction', 'addition', 'equals'];
 
+//function to switch on and off various LCD indicators
 const lcd = (arg) => {
     switch (arg) {
         //------- Operator indicators --------//
@@ -17,12 +23,15 @@ const lcd = (arg) => {
     }
 };
 
+//global Variables
+let buttonInputs = [], concatData; equation = [], operator = []; index = 0;
 
-let buttonInputs = [], concatData; equation = [], operationList = []; index = 0;
-
+//HTML debug mode easier to see what is happening than console
 const debug = () => {
     document.getElementById('concatD').innerHTML = concatData;
     document.getElementById('arrayValue').innerHTML = equation;
+    document.getElementById('operatorValue').innerHTML = operator;
+    document.getElementById('index').innerHTML = index;
 };
 
 const buttonInput = (input) => {
@@ -64,7 +73,7 @@ const buttonInput = (input) => {
             }
         };
     }
-    if (button === '0' && parseFloat(concatData)== 0) return;
+    if (button === '0' && parseFloat(concatData) == 0) return;
     if (button === '.' && buttonInputs.length == 0) button = '0.';
     if (buttonInputs.length <= 7) buttonInputs.push(button);
 
@@ -77,29 +86,35 @@ const buttonInput = (input) => {
 // Update LCD
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
+    if (isNaN(argument)) return;
     document.getElementById('LCDnumbers').innerHTML = argument;
-    if(argument!=0)equation[index] = parseFloat(argument);
+    if (argument != 0) equation[index] = parseFloat(argument);
     debug();
 };
 
 // clear - Clear all
 //----------------------------------------------------------//
+// one press clear last input if any. 2 presses clear all
 const cce = () => {
-if(equation.length==2){
-    console.log('clear only last input');
-    equation.pop()
-    buttonInputs = [];
-    concatData = '';
-    updateLCD(concatData)
-    debug()
-    return
-}
-
+    if (equation.length == 2) {
+        console.log('clear only last input and operator');
+        equation.pop();
+        operator = [];
+        lcd('opOff');
+        buttonInputs = [];
+        concatData = '';
+        updateLCD('0');
+        debug();
+        return;
+    }
+    lcd('opOff');
+    operator = [];
     buttonInputs = [];
     concatData = '';
     equation = [];
     index = 0;
-    updateLCD(concatData);
+    updateLCD(0);
+    debug();
 };
 
 
@@ -107,23 +122,24 @@ if(equation.length==2){
 //----------------------------------------------------------//
 const storeConcatData = (concatData) => {
     if (equation.length >= 2) equation.pop();
-    equation.push(parseFloat(concatData));
+    if (isNaN(concatData) == false) equation.push(parseFloat(concatData));
     debug();
 };
 
 // Store Operation
 //----------------------------------------------------------//
-const storeOperation = (input) => {
-    operationList.push(input);
+const storeOperation = (input) => {    
+    operator.push(input);
     buttonInputs = [];
     concatData = '';
-    if (operationList.length >= 2) solveEquation(input);
+    if (operator.length >= 2) solveEquation(input);
     equation.pop();
     debug();
 };
 
-const solveEquation = () => {
-    const operation = operationList.shift();
+const solveEquation = (input) => {
+    if(isNaN(equation[1])) return operator.shift(input)
+    const operation = operator.shift();
     switch (operation) {
         case ('addition'):
             equation[0] += equation[1];

@@ -21,7 +21,7 @@
   font-family: "myFirstFont";
   src: url(/media/digital.ttf);
 }
-.debugmode {
+.debug-mode {
   display: flex;
   justify-content: space-around;
   position: absolute;
