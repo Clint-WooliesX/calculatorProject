@@ -18,7 +18,7 @@ const lcd = (arg) => {
 };
 
 
-let buttonInputs = [], concatData; equation = [], operationList = [];
+let buttonInputs = [], concatData; equation = [], operationList = []; index = 0;
 
 const debug = () => {
     document.getElementById('concatD').innerHTML = concatData;
@@ -26,9 +26,9 @@ const debug = () => {
 };
 
 const buttonInput = (input) => {
-    debug()
+    debug();
     console.log('waiting for input');
-    
+
     //Input from HTML
     let button = document.getElementById(input).innerHTML;
 
@@ -39,6 +39,7 @@ const buttonInput = (input) => {
             case 'addition': {
                 lcd('+');
                 storeConcatData(concatData);
+                index = 1;
                 return storeOperation(input);
             }
             case 'subtraction': {
@@ -51,6 +52,11 @@ const buttonInput = (input) => {
                 storeConcatData(concatData);
                 return storeOperation(input);
             }
+            case 'division': {
+                lcd('/');
+                storeConcatData(concatData);
+                return storeOperation(input);
+            }
             case 'equals': {
                 lcd('opOff');
                 storeConcatData(concatData);
@@ -58,8 +64,8 @@ const buttonInput = (input) => {
             }
         };
     }
-    if (button === '0' && buttonInputs.length==0) return;
-    if (button === '.' && buttonInputs.length==0) button = '0.';
+    if (button === '0' && parseFloat(concatData)== 0) return;
+    if (button === '.' && buttonInputs.length == 0) button = '0.';
     if (buttonInputs.length <= 7) buttonInputs.push(button);
 
     concatData = buttonInputs.join("");
@@ -72,70 +78,64 @@ const buttonInput = (input) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     document.getElementById('LCDnumbers').innerHTML = argument;
+    if(argument!=0)equation[index] = parseFloat(argument);
     debug();
 };
 
 // clear - Clear all
 //----------------------------------------------------------//
 const cce = () => {
+if(equation.length==2){
+    console.log('clear only last input');
+    equation.pop()
     buttonInputs = [];
-    concatData = '0';
-    debug();
-    if (equation.length >= 2) {
-        console.log('cleared');
-        
-        updateLCD(equation[0]);
-        equation.pop();
-        lcd('opOff')
-        operationList=[]
-    }
-equation.pop()
+    concatData = '';
+    updateLCD(concatData)
+    debug()
+    return
+}
+
+    buttonInputs = [];
+    concatData = '';
+    equation = [];
+    index = 0;
     updateLCD(concatData);
-    debug();
 };
 
 
 // Store Data
 //----------------------------------------------------------//
 const storeConcatData = (concatData) => {
-    console.log('storeConcatData has been run');
-    // if (isNaN(concatData) != true) concatData='0';
-    debug();
     if (equation.length >= 2) equation.pop();
-    debug();
     equation.push(parseFloat(concatData));
-    buttonInputs = [];
-    concatData = '0';
     debug();
 };
 
-// Operation
+// Store Operation
 //----------------------------------------------------------//
 const storeOperation = (input) => {
     operationList.push(input);
+    buttonInputs = [];
+    concatData = '';
     if (operationList.length >= 2) solveEquation(input);
-    debug()
+    equation.pop();
+    debug();
 };
 
 const solveEquation = () => {
-    console.log('solve equation');
     const operation = operationList.shift();
     switch (operation) {
         case ('addition'):
             equation[0] += equation[1];
-            equation.pop();
-            debug()
             return updateLCD(equation[0]);
         case ('subtraction'):
             equation[0] -= equation[1];
-            equation.pop();
-            debug()
             return updateLCD(equation[0]);
         case ('multiply'):
-            equation[0] *= equation[1];
-            equation.pop();
-            debug();
+            equation[0] *= equation[1];;
             return updateLCD(equation[0]);
-            
+        case ('division'):
+            equation[0] /= equation[1];;
+            return updateLCD(equation[0]);
     }
 };
