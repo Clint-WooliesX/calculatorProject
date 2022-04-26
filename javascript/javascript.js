@@ -28,7 +28,11 @@ let
 lastInput = 0;
 
 const debug = () => {
-    console.log(`tempInput=${tempInput} input=${input} inputArray=${inputArray[0]}, ${inputArray[1]} index=${index} currentFunction=${currentFunction} errorState=${errorState}`);
+    document.getElementById("tempInputValue").innerHTML=tempInput;
+    document.getElementById("inputValue").innerHTML=tempInput
+    htmlArrayValue = document.getElementById("arrayValue").innerHTML=inputArray
+    htmlIndexValue = document.getElementById("indexValue").innerHTML=index
+    document.getElementById("operatorValue").innerHTML=currentFunction
 };
 
 debug();
@@ -93,57 +97,57 @@ const clear = () => {
     return;
 };
 
-// const functionButton = (button) => {
-//     if (isNaN(parseFloat(tempInput))) input = lastInput;
-//     inputArray[index] = input;
-//     index++;
+const functionButton = (button) => {
+    if (isNaN(parseFloat(tempInput))) input = lastInput;
+    inputArray[index] = input;
+    index++;
 
-//     switch (button) {
-//         case "cce": return clear();
-//         case "addition":
-//             lcd('+');
-//             currentFunction = '+';
-//             break;
-//         case "subtraction":
-//             lcd('-');
-//             currentFunction = '-';
-//             break;
-//         case "multiply":
-//             lcd('*');
-//             currentFunction = '*';
-//             break;
-//         case "division":
-//             lcd('/');
-//             currentFunction = '/';
-//             break;
-//     }
+    switch (button) {
+        case "cce": return clear();
+        case "addition":
+            lcd('+');
+            currentFunction = '+';
+            break;
+        case "subtraction":
+            lcd('-');
+            currentFunction = '-';
+            break;
+        case "multiply":
+            lcd('*');
+            currentFunction = '*';
+            break;
+        case "division":
+            lcd('/');
+            currentFunction = '/';
+            break;
+    }
 
-//     if (index == 2) {
-//         index = 0;
-//         switch (currentFunction) {
-//             case '+':
-//                 result = inputArray[0] + inputArray[1];
-//                 inputArray[0] = result;
-//                 tempInput = '';
-//                 index=1
-//                 return updateLCD(result);
-//             case '-':
-//                 result = inputArray[0] - inputArray[1];
-//                 inputArray[0] = result;
-//                 tempInput = '';
-//                 index=1
-//                 return updateLCD(result);
-//             case '*':
-//                 result = inputArray[0] * inputArray[1];
-//                 return updateLCD(result);
-//             case '/':
-//                 result = inputArray[0] / inputArray[1];
-//                 return updateLCD(result);
-//         }
+    if (index == 2) {
+        index = 0;
+        switch (currentFunction) {
+            case '+':
+                result = inputArray[0] + inputArray[1];
+                inputArray[0] = result;
+                tempInput = '';
+                index=1
+                return updateLCD(result);
+            case '-':
+                result = inputArray[0] - inputArray[1];
+                inputArray[0] = result;
+                tempInput = '';
+                index=1
+                return updateLCD(result);
+            case '*':
+                result = inputArray[0] * inputArray[1];
+                return updateLCD(result);
+            case '/':
+                result = inputArray[0] / inputArray[1];
+                return updateLCD(result);
+        }
 
-//     }
+    }
 
-//     index = 1
-//     tempInput = '';
-//     debug();
-// };
+    index = 1
+    tempInput = '';
+    debug();
+};
