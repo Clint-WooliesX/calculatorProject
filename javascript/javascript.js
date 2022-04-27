@@ -6,7 +6,7 @@ if (debugMode == false) document.getElementById('debugMode').style = "display:no
 const calcButton = document.querySelectorAll('.push-button');
 for (i = 0; i < calcButton.length; i++) {
     calcButton[i].addEventListener('mouseup', function () {
-        buttonInput(this.id);
+        buttonInput(this.innerText);
     });
 }
 
@@ -23,7 +23,8 @@ const powerToggle = () => {
     displayToggle.classList.toggle("display--glow");
     lightLabel.classList.toggle("on-off-label--glow");
     for (i = 0; i < calcButton.length; i++) {
-        calcButton[i].classList.toggle("push-button--glow");}
+        calcButton[i].classList.toggle("push-button--glow");
+    }
     soundFx2();
 };
 
@@ -40,28 +41,30 @@ const soundFx1 = () => {
 };
 
 //List of operation buttons that should not be handled like digits
-const fButtons = ["cce", 'plusMinus', 'root', 'percent', 'mrc', 'm-', 'm+', 'division', 'multiply', 'subtraction', 'addition', 'equals'];
+const fButtons = ["C-CE", '+/-', '√', '%', 'MRC', 'M-', 'M+', '÷', 'x', '-', '+', '='];
 
 //function to switch on and off various LCD indicators
 const lcd = (arg) => {
+    const LCDoperator = document.getElementById('LCDoperator');
+    const LCDmemory = document.getElementById('LCDmemory');
     switch (arg) {
         //------- Operator indicators --------//
-        case 'opOff': return document.getElementById('LCDoperator').innerHTML = '&nbsp;';
-        case '+': return document.getElementById('LCDoperator').innerHTML = '+';
-        case '-': return document.getElementById('LCDoperator').innerHTML = '-';
-        case '*': return document.getElementById('LCDoperator').innerHTML = 'x';
-        case '/': return document.getElementById('LCDoperator').innerHTML = '&#xF7';
-        case '%': return document.getElementById('LCDoperator').innerHTML = '%';
-        case 'root': return document.getElementById('LCDoperator').innerHTML = '&#8730';
+        case 'opOff': return LCDoperator.innerHTML = '&nbsp;';
+        case '+': return LCDoperator.innerHTML = '+';
+        case '-': return LCDoperator.innerHTML = '-';
+        case '*': return LCDoperator.innerHTML = 'x';
+        case '/': return LCDoperator.innerHTML = '&#xF7';
+        case '%': return LCDoperator.innerHTML = '%';
+        case 'root': return LCDoperator.innerHTML = '&#8730';
         //------- Memory indicators --------//
-        case 'memOff': return document.getElementById('LCDmemory').innerHTML = '&nbsp;';
-        case 'm': return document.getElementById('LCDmemory').innerHTML = 'M';
+        case 'memOff': return LCDmemory.innerHTML = '&nbsp;';
+        case 'm': return LCDmemory.innerHTML = 'M';
         default: return;
     }
 };
 
 //global Variables
-let buttonInputs = [], concatData = ''; equation = [], operator = []; index = 0,errorState=false;
+let buttonInputs = [], equation = [], operator = [], index = 0, concatData = '', errorState = false;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -74,70 +77,73 @@ const debug = () => {
 // Collect button inputs
 //----------------------------------------------------------//
 const buttonInput = (input) => {
-    soundFx1();
+console.log(input)
+    //comment to disable button sounds
+    soundFx1(); 
+
     //Input from HTML
-    let button = document.getElementById(input).innerHTML;
+    const button = input
     //validation                       ================> needs optimising
     if (fButtons.includes(input)) {
         switch (input) {
-            case 'cce': return cce();
-            case 'addition': {
+            case 'C-CE': return cce();
+            case '+': {
                 lcd('+');
                 storeConcatData(concatData);
                 index = 1;
                 return storeOperation(input);
             }
-            case 'subtraction': {
+            case '*': {
                 lcd('-');
                 storeConcatData(concatData);
                 index = 1;
                 return storeOperation(input);
             }
-            case 'multiply': {
+            case 'x': {
                 lcd('*');
                 storeConcatData(concatData);
                 index = 1;
                 return storeOperation(input);
             }
-            case 'division': {
+            case '÷': {
                 lcd('/');
                 storeConcatData(concatData);
                 index = 1;
                 return storeOperation(input);
             }
-            case 'equals': {
+            case '=': {
                 lcd('opOff');
                 storeConcatData(concatData);
                 index = 1;
                 return storeOperation(input);
             }
-            case 'mrc': {
+            case 'MRC': {
                 ;
                 return alert('key not coded yet');
             }
-            case 'm-': {
+            case 'M-': {
                 ;
                 return alert('key not coded yet');
             }
-            case 'm+': {
+            case 'M+': {
                 ;
                 return alert('key not coded yet');
             }
-            case 'plusMinus': {
+            case '+/-': {
                 ;
                 return alert('key not coded yet');
             }
-            case 'root': {
+            case '√': {
                 ;
                 return alert('key not coded yet');
             }
-            case 'percent': {
+            case '%': {
                 ;
                 return alert('key not coded yet');
             }
         };
     }
-    if(errorState===true)return
+    if (errorState === true) return;
     //prevent leading zeros
     if (button === '0' && parseFloat(concatData) == 0) return;
     //handle decimals
@@ -154,7 +160,7 @@ const buttonInput = (input) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
-    if (argument.toString().length >9) {
+    if (argument.toString().length > 9) {
         argument = 'error';
         errorState = true;
     }
@@ -174,7 +180,7 @@ const cce = () => {
         lcd('opOff');
         buttonInputs = [];
         concatData = '';
-        errorState=false
+        errorState = false;
         updateLCD('0');
         debug();
         return;
@@ -186,7 +192,7 @@ const cce = () => {
     concatData = '';
     equation = [];
     index = 0;
-    errorState = false
+    errorState = false;
     updateLCD(0);
     debug();
 };
