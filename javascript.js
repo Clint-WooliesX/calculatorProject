@@ -2,7 +2,7 @@
 
 // ########--------- SETTINGS ---------###########
 
-const soundFX = false
+const soundFX = true
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
 const useCommas = true;
