@@ -72,7 +72,7 @@ const lcd = (arg) => {
         case 'opOff': return LCDoperator.innerHTML = '&nbsp;';
         case '+': return LCDoperator.innerHTML = '+';
         case '-': return LCDoperator.innerHTML = '-';
-        case '*': return LCDoperator.innerHTML = 'x';
+        case 'x': return LCDoperator.innerHTML = 'x';
         case '/': return LCDoperator.innerHTML = '&#xF7';
         case '%': return LCDoperator.innerHTML = '%';
         case 'root': return LCDoperator.innerHTML = '&#8730';
