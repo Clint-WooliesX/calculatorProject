@@ -201,7 +201,7 @@ const solveEquation = (input) => {
         case ('-'):
             equation[0] -= equation[1];
             return updateLCD(equation[0]);
-        case ('*'):
+        case ('x'):
             equation[0] *= equation[1];
             return updateLCD(equation[0]);
         case ('÷'):
