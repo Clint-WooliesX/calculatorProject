@@ -1,8 +1,8 @@
-//turn HTML debug mode on/off
-const debugMode = false;
-if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
-//settings
+
+// ########--------- SETTINGS ---------###########
+
+const soundFX = false
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
 const useCommas = true;
@@ -14,6 +14,13 @@ if (useCommas == true) {
 } else {
     numDigits = 7;
 }
+//turn HTML debug mode on/off
+const debugMode = false;
+if (debugMode == false) document.getElementById('debugMode').style = "display:none";
+
+// ########--------- SETTINGS ---------###########
+
+
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
 const calcButton = document.querySelectorAll('.push-button');
@@ -38,7 +45,7 @@ const powerToggle = () => {
     for (i = 0; i < calcButton.length; i++) {
         calcButton[i].classList.toggle("push-button--glow");
     }
-    soundFx2();
+    if(soundFX==true)soundFx2();
 };
 
 //backlight switch soundFx
@@ -94,8 +101,8 @@ const debug = () => {
 const buttonInput = (button) => {
     //console.log here for demo purposes
     console.log(button);
-    //comment to disable button sounds
-    soundFx1();
+
+    if (soundFX == true) soundFx1();
 
     //Input from HTML
     // const button = input;
