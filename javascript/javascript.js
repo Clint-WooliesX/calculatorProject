@@ -82,21 +82,25 @@ const buttonInput = (input) => {
             case 'subtraction': {
                 lcd('-');
                 storeConcatData(concatData);
+                index = 1;
                 return storeOperation(input);
             }
             case 'multiply': {
                 lcd('*');
                 storeConcatData(concatData);
+                index = 1;
                 return storeOperation(input);
             }
             case 'division': {
                 lcd('/');
                 storeConcatData(concatData);
+                index = 1;
                 return storeOperation(input);
             }
             case 'equals': {
                 lcd('opOff');
                 storeConcatData(concatData);
+                index = 1;
                 return storeOperation(input);
             }
         };
