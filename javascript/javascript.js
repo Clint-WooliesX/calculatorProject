@@ -1,5 +1,5 @@
 //turn HTML debug mode on/off
-let debugMode = true;
+let debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
