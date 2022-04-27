@@ -133,7 +133,11 @@ const updateLCD = (argument) => {
         argument = 'error';
         errorState = true;
     }
+    //no commas
     document.getElementById('LCDnumbers').innerHTML = argument;
+    //uses comma seprators
+    // document.getElementById('LCDnumbers').innerHTML = argument.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
     equation[index] = parseFloat(argument); // value to equation
     debug();
 };
