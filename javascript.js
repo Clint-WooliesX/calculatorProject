@@ -2,7 +2,7 @@
 
 // ########--------- SETTINGS ---------###########
 
-const soundFX = true
+const soundFX = true;
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
 const useCommas = true;
@@ -45,7 +45,7 @@ const powerToggle = () => {
     for (i = 0; i < calcButton.length; i++) {
         calcButton[i].classList.toggle("push-button--glow");
     }
-    if(soundFX==true)soundFx2();
+    if (soundFX == true) soundFx2();
 };
 
 //backlight switch soundFx
@@ -116,9 +116,9 @@ const buttonInput = (button) => {
             lcd(input);
             if (input === '=') {
                 lcd('opOff');
-            updateLCD(equation[0])
+                updateLCD(equation[0]);
             }
-            storeConcatData(concatData)
+            storeConcatData(concatData);
             index = 1;
             return storeOperation(input);
         };
@@ -153,6 +153,13 @@ const buttonInput = (button) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
+    if (argument.toString().length > numDigits + 1) {
+        for (i = 10; i  > 0; i--) {
+            console.log(i)
+            argument = parseFloat(argument).toFixed(i);
+            if (argument.toString().length < numDigits + 1)break;
+        } return updateLCD(argument);
+    }
     if (argument.toString().length > numDigits + 1) {
         argument = 'error';
         errorState = true;
