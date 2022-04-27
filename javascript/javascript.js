@@ -5,20 +5,20 @@ if (debugMode == false) document.getElementById('debugMode').style = "display:no
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
 const calcButton = document.querySelectorAll('.push-button');
 for (i = 0; i < calcButton.length; i++) {
-    calcButton[i].addEventListener('click', function () {
+    calcButton[i].addEventListener('mousedown', function () {
         buttonInput(this.id);
     });
 }
 
 const powerSwitch = document.getElementById('power');
 const displayToggle = document.getElementById('display');
-powerSwitch.addEventListener('click', function () { powerToggle(); });
+powerSwitch.addEventListener('mousedown', function () { powerToggle(); });
 
 const powerToggle = () => {
     console.log('clicked');
     powerSwitch.classList.toggle("slider--on");
     displayToggle.classList.toggle("display--glow");
-    // soundFx2();
+    soundFx2();
 };
 
 const soundFx2 = () => {
@@ -27,7 +27,7 @@ const soundFx2 = () => {
 };
 
 const soundFx1 = () => {
-    var audio = new Audio('/media/soundFx.m4a');
+    var audio = new Audio('/media/softClick.m4a');
     audio.play();
 };
 
@@ -66,7 +66,7 @@ const debug = () => {
 // Collect button inputs
 //----------------------------------------------------------//
 const buttonInput = (input) => {
-    // soundFx1();
+    soundFx1();
     //Input from HTML
     let button = document.getElementById(input).innerHTML;
     //validation                       ================> needs optimising
