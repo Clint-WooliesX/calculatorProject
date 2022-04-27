@@ -20,6 +20,8 @@ const powerToggle = () => {
     console.log('mouseup');
     powerSwitch.classList.toggle("slider--on");
     displayToggle.classList.toggle("display--glow");
+    for (i = 0; i < calcButton.length; i++) {
+        calcButton[i].classList.toggle("push-button--glow");}
     soundFx2();
 };
 

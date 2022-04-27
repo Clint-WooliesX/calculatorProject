@@ -177,8 +177,9 @@ body {
   box-shadow: inset 3px 3px 10px black;
 }
 .display--glow {
+  z-index: 300;
   background: #92e59f;
-  box-shadow: 1px 1px 30px rgba(146, 229, 159, 0.462745098), -1px -1px 30px rgba(146, 229, 159, 0.462745098), 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 1px 30px rgba(146, 229, 159, 0.462745098), -1px -1px 30px rgba(146, 229, 159, 0.462745098), 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, 0.8);
   color: rgba(0, 0, 0, 0.594);
   transition: 300ms;
 }
@@ -263,6 +264,9 @@ body {
 }
 .push-button--medium-font {
   font-size: 34px;
+}
+.push-button--glow {
+  color: #92e59f;
 }
 .push-button--orange {
   background-color: #eaa22c;

@@ -180,8 +180,9 @@ body {
   border-radius: 15px;
   box-shadow: inset 3px 3px 10px black;
   &--glow {
+    z-index: 300;
     background: #92e59f;
-    box-shadow: 1px 1px 30px #92e59f76, -1px -1px 30px #92e59f76,0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .7);
+    box-shadow: 1px 1px 30px #92e59f76, -1px -1px 30px #92e59f76,0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .8);
     color: rgba(0, 0, 0, 0.594),;
     transition: 300ms;
   }
@@ -268,6 +269,9 @@ body {
   }
   &--medium-font {
     font-size: 34px;
+  }
+  &--glow{
+    color:#92e59f
   }
   &--orange {
     background-color: #eaa22c;
