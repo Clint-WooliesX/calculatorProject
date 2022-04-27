@@ -114,8 +114,11 @@ const buttonInput = (button) => {
         const operatorKey = (input) => {
             if (equation[0] == undefined) return;
             lcd(input);
-            if (input === '=') lcd('opOff');
-            storeConcatData(concatData);
+            if (input === '=') {
+                lcd('opOff');
+            updateLCD(equation[0])
+            }
+            storeConcatData(concatData)
             index = 1;
             return storeOperation(input);
         };
