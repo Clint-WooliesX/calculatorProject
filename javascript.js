@@ -1,5 +1,5 @@
 //turn HTML debug mode on/off
-let debugMode = true;
+const debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
@@ -30,13 +30,13 @@ const powerToggle = () => {
 
 //backlight switch soundFx
 const soundFx2 = () => {
-    var audio = new Audio('/media/lightSwitch.m4a');
+    const audio = new Audio('/media/lightSwitch.m4a');
     audio.play();
 };
 
 //button press soundFx
 const soundFx1 = () => {
-    var audio = new Audio('/media/soundfx.m4a');
+    const audio = new Audio('/media/soundfx.m4a');
     audio.play();
 };
 
@@ -64,7 +64,9 @@ const lcd = (arg) => {
 };
 
 //global Variables
-let buttonInputs = [], equation = [], operator = [], index = 0, concatData = '', errorState = false;
+//Attempted to make arrays const variables but it breaks code. suspect it has something to do with scope
+let buttonInputs = [], equation = [], operator = [];
+let index = 0, concatData = '', errorState = false;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -86,8 +88,8 @@ const buttonInput = (button) => {
     //validation                       ================> needs optimising
     if (fButtons.includes(button)) {
 
-        //sub function replaced about 50 lines of code 
-        //not sure if it should reside outside of if statement 
+        //sub function replaced about 50 lines of code
+        //not sure if it should reside outside of if statement
         const operatorKey = (input) => {
             if (equation[0] == undefined) return;
             lcd(input);
@@ -140,7 +142,7 @@ const updateLCD = (argument) => {
 //----------------------------------------------------------//
 const cce = () => {
 
-    //sub function replaced duplicated code 
+    //sub function replaced duplicated code
     const resetVars = () => {
         lcd('opOff');
         buttonInputs = [];
