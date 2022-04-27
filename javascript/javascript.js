@@ -1,11 +1,11 @@
 //turn HTML debug mode on/off
-let debugMode = false;
+let debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
 const calcButton = document.querySelectorAll('.push-button');
 for (i = 0; i < calcButton.length; i++) {
-    calcButton[i].addEventListener('mousedown', function () {
+    calcButton[i].addEventListener('mouseup', function () {
         buttonInput(this.id);
     });
 }
@@ -17,7 +17,7 @@ powerSwitch.addEventListener('mousedown', function () { powerToggle(); });
 
 //back light fx
 const powerToggle = () => {
-    console.log('clicked');
+    console.log('mouseup');
     powerSwitch.classList.toggle("slider--on");
     displayToggle.classList.toggle("display--glow");
     soundFx2();
@@ -31,7 +31,7 @@ const soundFx2 = () => {
 
 //button press soundFx
 const soundFx1 = () => {
-    var audio = new Audio('/media/softClick.m4a');
+    var audio = new Audio('/media/soundfx.m4a');
     audio.play();
 };
 
@@ -57,7 +57,7 @@ const lcd = (arg) => {
 };
 
 //global Variables
-let buttonInputs = [], concatData = ''; equation = [], operator = []; index = 0;
+let buttonInputs = [], concatData = ''; equation = [], operator = []; index = 0,errorState=false;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -107,15 +107,40 @@ const buttonInput = (input) => {
                 index = 1;
                 return storeOperation(input);
             }
+            case 'mrc': {
+                ;
+                return alert('key not coded yet');
+            }
+            case 'm-': {
+                ;
+                return alert('key not coded yet');
+            }
+            case 'm+': {
+                ;
+                return alert('key not coded yet');
+            }
+            case 'plusMinus': {
+                ;
+                return alert('key not coded yet');
+            }
+            case 'root': {
+                ;
+                return alert('key not coded yet');
+            }
+            case 'percent': {
+                ;
+                return alert('key not coded yet');
+            }
         };
     }
+    if(errorState===true)return
     //prevent leading zeros
     if (button === '0' && parseFloat(concatData) == 0) return;
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
     //handle value longer than 7 digits
     if (buttonInputs.length <= 7) buttonInputs.push(button);
-    //concantenate colected digits into a single number
+    //concatenate collected digits into a single number
     concatData = buttonInputs.join("");
     if (isNaN(concatData) != true) updateLCD(concatData);
     debug();
@@ -125,8 +150,12 @@ const buttonInput = (input) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
+    if (argument.toString().length >9) {
+        argument = 'error';
+        errorState = true;
+    }
     document.getElementById('LCDnumbers').innerHTML = argument;
-    if (argument != 0) equation[index] = parseFloat(argument); // value to equation
+    equation[index] = parseFloat(argument); // value to equation
     debug();
 };
 
@@ -141,6 +170,7 @@ const cce = () => {
         lcd('opOff');
         buttonInputs = [];
         concatData = '';
+        errorState=false
         updateLCD('0');
         debug();
         return;
@@ -152,6 +182,7 @@ const cce = () => {
     concatData = '';
     equation = [];
     index = 0;
+    errorState = false
     updateLCD(0);
     debug();
 };
