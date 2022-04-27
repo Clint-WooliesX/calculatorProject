@@ -1,5 +1,5 @@
 //turn HTML debug mode on/off
-let debugMode = true;
+let debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
@@ -10,10 +10,12 @@ for (i = 0; i < calcButton.length; i++) {
     });
 }
 
+//event listener for power back light switch
 const powerSwitch = document.getElementById('power');
 const displayToggle = document.getElementById('display');
 powerSwitch.addEventListener('mousedown', function () { powerToggle(); });
 
+//back light fx
 const powerToggle = () => {
     console.log('clicked');
     powerSwitch.classList.toggle("slider--on");
@@ -21,11 +23,13 @@ const powerToggle = () => {
     soundFx2();
 };
 
+//backlight switch soundFx
 const soundFx2 = () => {
     var audio = new Audio('/media/lightSwitch.m4a');
     audio.play();
 };
 
+//button press soundFx
 const soundFx1 = () => {
     var audio = new Audio('/media/softClick.m4a');
     audio.play();
@@ -174,6 +178,8 @@ const storeOperation = (input) => {
     debug();
 };
 
+// Solve equation
+//----------------------------------------------------------//
 const solveEquation = (input) => {
     //allow change of operator
     if (isNaN(equation[1])) return operator.shift(input);
