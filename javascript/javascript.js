@@ -2,6 +2,14 @@
 let debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
+//get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
+const calcButton = document.querySelectorAll('.push-button');
+for (i = 0; i < calcButton.length; i++) {
+    calcButton[i].addEventListener('click', function () {
+        buttonInput(this.id);
+    });
+}
+
 //List of operation buttons that should not be handled like digits
 const fButtons = ["cce", 'plusMinus', 'root', 'percent', 'mrc', 'm-', 'm+', 'division', 'multiply', 'subtraction', 'addition', 'equals'];
 
@@ -24,7 +32,7 @@ const lcd = (arg) => {
 };
 
 //global Variables
-let buttonInputs = [], concatData=''; equation = [], operator = []; index = 0;
+let buttonInputs = [], concatData = ''; equation = [], operator = []; index = 0;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -131,7 +139,7 @@ const storeConcatData = (concatData) => {
 
 // Store Operation
 //----------------------------------------------------------//
-const storeOperation = (input) => {    
+const storeOperation = (input) => {
     operator.push(input);
     buttonInputs = [];
     concatData = '';
@@ -142,7 +150,7 @@ const storeOperation = (input) => {
 
 const solveEquation = (input) => {
     //allow change of operator
-    if(isNaN(equation[1])) return operator.shift(input)
+    if (isNaN(equation[1])) return operator.shift(input);
     //solve equation using current operator
     const operation = operator.shift();
     switch (operation) {
