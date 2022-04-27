@@ -3,6 +3,8 @@ const debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //settings
+//--------Set useCommas = <true/false>
+//---changes font size and location to fit comma separators
 const useCommas = true;
 if (useCommas == true) {
     document.getElementById('LCDnumbers').style = "font-size:35px;top:20px";
