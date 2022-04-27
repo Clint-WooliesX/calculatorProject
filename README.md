@@ -2,6 +2,7 @@
 
 ![Calculator images](/media/CalcPics.png "Calculator project")
 
+
 ## MVP
 * Functioning calculator coded using java script
 * Take a photo of a real calculator and reproduce it using HTML and SCSS
@@ -27,23 +28,23 @@ I intend to use multiple functions, 1 or more will be called for each button and
 I plan to use 1 function that is able to take arguments as to what button called it and what digit it should store. I will employ the following approach and modify as needed should it not work as expected
 * Entered digits will be appended to a string.
 * When an operator/special key is pressed the string will be passed to a float and stored in an array with its operator.
-   ~~ - index0 = float~~
-   ~~ - index1 = operator~~
+   ~~- index0 = float~~
+   ~~- index1 = operator~~
    - ended up using 2 arrays
    - one array to store equation values
    - one array to store operators ( this needs to be changed to a variable as only 1 operator is ever stored)
 * ~~the above array will be nested inside another array~~
-    ~~- Array-A~~
-       ~~ - Index 0 //First float and operator~~
-       ~~     - Array-B~~
-      ~~      - Index 0 //Float~~
-      ~~      - index 1 //operator~~
-      ~~   - Index 1 //Second float and operator~~
-      ~~      - Index 0 //Float~~
-      ~~      - index 1 //operator~~
+    - ~~Array-A~~
+    - ~~Index 0 //First float and operator~~
+    - ~~Array-B~~
+    - ~~Index 0 //Float~~
+    - ~~index 1 //operator~~
+    - ~~Index 1 //Second float and operator~~
+        - ~~Index 0 //Float~~
+        - ~~index 1 //operator~~
         - ...
         - ...
-       ~~ -  Index X //final float and denoted by use of the = button.~~
+        - ~~Index X //final float and denoted by use of the = button.~~
 * ~~The reason for this approach is to all the clear and clear all button to function as expected~~ Found another approach based on what was currently stored in the arrays and variables
     - 1 press will allow only the last entered value to be cleared from memory while keeping subtotal.
     - 2 presses of the clear key will clear memory.
