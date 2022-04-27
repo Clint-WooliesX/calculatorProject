@@ -2,6 +2,7 @@
 
 ![Calculator images](/media/CalcPics.png "Calculator project")
 
+
 ## MVP
 * Functioning calculator coded using java script
 * Take a photo of a real calculator and reproduce it using HTML and SCSS
