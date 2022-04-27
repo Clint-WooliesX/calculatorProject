@@ -2,6 +2,15 @@
 const debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
+//settings
+const useCommas = true;
+if (useCommas == true) {
+    document.getElementById('LCDnumbers').style = "font-size:35px;top:20px";
+    numDigits = 9;
+} else {
+    numDigits = 7;
+}
+
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
 const calcButton = document.querySelectorAll('.push-button');
 for (i = 0; i < calcButton.length; i++) {
@@ -117,7 +126,7 @@ const buttonInput = (button) => {
     if (button === '.' && buttonInputs.length == 0) button = '0.';
 
     //handle value longer than 7 digits
-    if (buttonInputs.length <= 7) buttonInputs.push(button);
+    if (buttonInputs.length <= numDigits) buttonInputs.push(button);
 
     //concatenate collected digits into a single number
     concatData = buttonInputs.join("");
@@ -129,14 +138,19 @@ const buttonInput = (button) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
-    if (argument.toString().length > 9) {
+    if (argument.toString().length > numDigits + 1) {
         argument = 'error';
         errorState = true;
     }
-    //no commas
-    document.getElementById('LCDnumbers').innerHTML = argument;
-    //uses comma seprators
-    // document.getElementById('LCDnumbers').innerHTML = argument.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (useCommas == true) {
+        //uses comma seprators
+        //Regex inserts a comma seperators
+        document.getElementById('LCDnumbers').innerHTML = argument.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    } else {
+        //no commas
+        document.getElementById('LCDnumbers').innerHTML = argument;
+    };
+
 
     equation[index] = parseFloat(argument); // value to equation
     debug();
