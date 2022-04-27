@@ -127,6 +127,9 @@ body {
   color: white;
   font-family: "Staatliches";
 }
+.on-off-label--glow {
+  color: #12f934;
+}
 
 .slider {
   cursor: pointer;

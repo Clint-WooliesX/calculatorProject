@@ -13,6 +13,7 @@ for (i = 0; i < calcButton.length; i++) {
 //event listener for power back light switch
 const powerSwitch = document.getElementById('power');
 const displayToggle = document.getElementById('display');
+const lightLabel = document.getElementById('powerLabel');
 powerSwitch.addEventListener('mousedown', function () { powerToggle(); });
 
 //back light fx
@@ -20,6 +21,7 @@ const powerToggle = () => {
     console.log('mouseup');
     powerSwitch.classList.toggle("slider--on");
     displayToggle.classList.toggle("display--glow");
+    lightLabel.classList.toggle("on-off-label--glow");
     for (i = 0; i < calcButton.length; i++) {
         calcButton[i].classList.toggle("push-button--glow");}
     soundFx2();
