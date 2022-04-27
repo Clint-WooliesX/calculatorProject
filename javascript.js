@@ -7,7 +7,9 @@ if (debugMode == false) document.getElementById('debugMode').style = "display:no
 //---changes font size and location to fit comma separators
 const useCommas = true;
 if (useCommas == true) {
+    //change font size location
     document.getElementById('LCDnumbers').style = "font-size:35px;top:20px";
+    //limit max digits on screen
     numDigits = 9;
 } else {
     numDigits = 7;
@@ -90,6 +92,7 @@ const debug = () => {
 // Collect button inputs
 //----------------------------------------------------------//
 const buttonInput = (button) => {
+    //console.log here for demo purposes
     console.log(button);
     //comment to disable button sounds
     soundFx1();
@@ -145,8 +148,8 @@ const updateLCD = (argument) => {
         errorState = true;
     }
     if (useCommas == true) {
-        //uses comma seprators
-        //Regex inserts a comma seperators
+        //uses comma separators
+        //Regex inserts a comma separators
         document.getElementById('LCDnumbers').innerHTML = argument.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     } else {
         //no commas
