@@ -34,10 +34,10 @@ I plan to use 1 function that is able to take arguments as to what button called
    - one array to store operators ( this needs to be changed to a variable as only 1 operator is ever stored)
 * ~~the above array will be nested inside another array~~
     ~~- Array-A~~
-       ~~ - Index 0 //First float and operator~~
-            ~~- Array-B~~
-            ~~- Index 0 //Float~~
-            ~~- index 1 //operator~~
+        ~~- Index 0 //First float and operator~~
+        ~~- Array-B~~
+         ~~- Index 0 //Float~~
+         ~~- index 1 //operator~~
         ~~- Index 1 //Second float and operator~~
             ~~- Index 0 //Float~~
             ~~- index 1 //operator~~
