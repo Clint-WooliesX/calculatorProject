@@ -21,6 +21,13 @@ I chose the photo of my calculator based on the following criteria
 * To challenge myself I have decided to attempt to render the calculator as closely as possible and include animated buttons.
 * The display will also indicate when a value is stored in memory and use a mono-space font mimicking a real LCD screen.
 
+# Extra features
+* in the words of Vanilla Ice "... will I ever stop? yo, I don't know. turn off the lights and I glow"
+* settings in Javascript file to enable/disable options
+    - Dev Mode
+    - Sound FX
+    - comma seperators
+
 ## JavaScript outline.
 I intend to use multiple functions, 1 or more will be called for each button and its intended use. DOM manipulation will be used to output to the virtual display in real time.
 
@@ -66,5 +73,7 @@ I will use DOM manipulation to out put running subtotal/totals to the screen alo
 
 ## Log file
 if time permits I will include an log output to text file for the purposes of recording what is happening  under the hood, and for debugging purposes.
+
+
 
 
