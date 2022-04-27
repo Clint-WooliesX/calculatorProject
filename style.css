@@ -178,7 +178,7 @@ body {
 }
 .display--glow {
   background: #92e59f;
-  box-shadow: 1px 1px 30px rgba(146, 229, 159, 0.462745098), -1px -1px 30px rgba(146, 229, 159, 0.462745098);
+  box-shadow: 1px 1px 30px rgba(146, 229, 159, 0.462745098), -1px -1px 30px rgba(146, 229, 159, 0.462745098), 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, 0.7);
   color: rgba(0, 0, 0, 0.594);
   transition: 300ms;
 }

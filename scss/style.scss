@@ -181,8 +181,8 @@ body {
   box-shadow: inset 3px 3px 10px black;
   &--glow {
     background: #92e59f;
-    box-shadow: 1px 1px 30px #92e59f76, -1px -1px 30px #92e59f76;
-    color: rgba(0, 0, 0, 0.594);
+    box-shadow: 1px 1px 30px #92e59f76, -1px -1px 30px #92e59f76,0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .7);
+    color: rgba(0, 0, 0, 0.594),;
     transition: 300ms;
   }
 }
