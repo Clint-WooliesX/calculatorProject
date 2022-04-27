@@ -1,5 +1,5 @@
 //turn HTML debug mode on/off
-let debugMode = false;
+let debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
@@ -74,82 +74,51 @@ const debug = () => {
     document.getElementById('index').innerHTML = index;
 };
 
+
+
 // Collect button inputs
 //----------------------------------------------------------//
-const buttonInput = (input) => {
-console.log(input)
+const buttonInput = (button) => {
+    console.log(button);
     //comment to disable button sounds
-    soundFx1(); 
+    soundFx1();
 
     //Input from HTML
-    const button = input
+    // const button = input;
     //validation                       ================> needs optimising
-    if (fButtons.includes(input)) {
-        switch (input) {
-            case 'C-CE': return cce();
-            case '+': {
-                lcd('+');
-                storeConcatData(concatData);
-                index = 1;
-                return storeOperation(input);
-            }
-            case '*': {
-                lcd('-');
-                storeConcatData(concatData);
-                index = 1;
-                return storeOperation(input);
-            }
-            case 'x': {
-                lcd('*');
-                storeConcatData(concatData);
-                index = 1;
-                return storeOperation(input);
-            }
-            case '÷': {
-                lcd('/');
-                storeConcatData(concatData);
-                index = 1;
-                return storeOperation(input);
-            }
-            case '=': {
-                lcd('opOff');
-                storeConcatData(concatData);
-                index = 1;
-                return storeOperation(input);
-            }
-            case 'MRC': {
-                ;
-                return alert('key not coded yet');
-            }
-            case 'M-': {
-                ;
-                return alert('key not coded yet');
-            }
-            case 'M+': {
-                ;
-                return alert('key not coded yet');
-            }
-            case '+/-': {
-                ;
-                return alert('key not coded yet');
-            }
-            case '√': {
-                ;
-                return alert('key not coded yet');
-            }
-            case '%': {
-                ;
-                return alert('key not coded yet');
-            }
+    if (fButtons.includes(button)) {
+
+        //sub function replaced about 50 lines of code 
+        //not sure if it should reside outside of if statement 
+        const operatorKey = (input) => {
+            if(equation[0]==undefined)return;
+            lcd(input);
+            if (input === '=') lcd('opOff');
+            storeConcatData(concatData);
+            index = 1;
+            return storeOperation(input);
         };
+        
+        if (button === 'C-CE') return cce();
+
+        // REMOVE ONCE KEYS ARE CODED
+        const notCoded = ['+/-', '√', '%', 'MRC', 'M-', 'M+']
+        if (notCoded.includes(button))return alert('Sorry, not coded yet.')
+
+        return operatorKey(button);   
     }
+    // prevent further input until error state cleaed with C-CE button
     if (errorState === true) return;
+
     //prevent leading zeros
     if (button === '0' && parseFloat(concatData) == 0) return;
+
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
+
     //handle value longer than 7 digits
     if (buttonInputs.length <= 7) buttonInputs.push(button);
+
     //concatenate collected digits into a single number
     concatData = buttonInputs.join("");
     if (isNaN(concatData) != true) updateLCD(concatData);
@@ -227,16 +196,16 @@ const solveEquation = (input) => {
     //solve equation using current operator
     const operation = operator.shift();
     switch (operation) {
-        case ('addition'):
+        case ('+'):
             equation[0] += equation[1];
             return updateLCD(equation[0]);
-        case ('subtraction'):
+        case ('-'):
             equation[0] -= equation[1];
             return updateLCD(equation[0]);
-        case ('multiply'):
+        case ('*'):
             equation[0] *= equation[1];
             return updateLCD(equation[0]);
-        case ('division'):
+        case ('÷'):
             equation[0] /= equation[1];;
             return updateLCD(equation[0]);
     }
