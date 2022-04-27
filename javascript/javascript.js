@@ -74,8 +74,6 @@ const debug = () => {
     document.getElementById('index').innerHTML = index;
 };
 
-
-
 // Collect button inputs
 //----------------------------------------------------------//
 const buttonInput = (button) => {
@@ -91,21 +89,21 @@ const buttonInput = (button) => {
         //sub function replaced about 50 lines of code 
         //not sure if it should reside outside of if statement 
         const operatorKey = (input) => {
-            if(equation[0]==undefined)return;
+            if (equation[0] == undefined) return;
             lcd(input);
             if (input === '=') lcd('opOff');
             storeConcatData(concatData);
             index = 1;
             return storeOperation(input);
         };
-        
+        //requires its own function call
         if (button === 'C-CE') return cce();
 
         // REMOVE ONCE KEYS ARE CODED
-        const notCoded = ['+/-', '√', '%', 'MRC', 'M-', 'M+']
-        if (notCoded.includes(button))return alert('Sorry, not coded yet.')
+        const notCoded = ['+/-', '√', '%', 'MRC', 'M-', 'M+'];
+        if (notCoded.includes(button)) return alert('Sorry, not coded yet.');
 
-        return operatorKey(button);   
+        return operatorKey(button);
     }
     // prevent further input until error state cleaed with C-CE button
     if (errorState === true) return;
@@ -140,32 +138,33 @@ const updateLCD = (argument) => {
 
 // clear - Clear all
 //----------------------------------------------------------//
-// one press clear last input if any. 2 presses clear all
 const cce = () => {
-    if (equation.length == 2) {
-        console.log('clear only last input and operator');
-        equation.pop();
-        operator = [];
+
+    //sub function replaced duplicated code 
+    const resetVars = () => {
         lcd('opOff');
         buttonInputs = [];
         concatData = '';
         errorState = false;
+    };
+
+    //first press - Clear
+    if (equation.length == 2) {
+        console.log('clear only last input and operator');
+        equation.pop();
+        resetVars();
         updateLCD('0');
         debug();
         return;
     }
-    //press number 2 clears all
-    lcd('opOff');
+    //Second press - clear all
+    resetVars();
     operator = [];
-    buttonInputs = [];
-    concatData = '';
     equation = [];
     index = 0;
-    errorState = false;
     updateLCD(0);
     debug();
 };
-
 
 // Store Data
 //----------------------------------------------------------//
