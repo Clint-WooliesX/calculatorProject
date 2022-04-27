@@ -10,6 +10,27 @@ for (i = 0; i < calcButton.length; i++) {
     });
 }
 
+const powerSwitch = document.getElementById('power');
+const displayToggle = document.getElementById('display');
+powerSwitch.addEventListener('click', function () { powerToggle(); });
+
+const powerToggle = () => {
+    console.log('clicked');
+    powerSwitch.classList.toggle("slider--on");
+    displayToggle.classList.toggle("display--glow");
+    // soundFx2();
+};
+
+const soundFx2 = () => {
+    var audio = new Audio('/media/lightSwitch.m4a');
+    audio.play();
+};
+
+const soundFx1 = () => {
+    var audio = new Audio('/media/soundFx.m4a');
+    audio.play();
+};
+
 //List of operation buttons that should not be handled like digits
 const fButtons = ["cce", 'plusMinus', 'root', 'percent', 'mrc', 'm-', 'm+', 'division', 'multiply', 'subtraction', 'addition', 'equals'];
 
@@ -45,6 +66,7 @@ const debug = () => {
 // Collect button inputs
 //----------------------------------------------------------//
 const buttonInput = (input) => {
+    // soundFx1();
     //Input from HTML
     let button = document.getElementById(input).innerHTML;
     //validation                       ================> needs optimising
@@ -161,7 +183,7 @@ const solveEquation = (input) => {
             equation[0] -= equation[1];
             return updateLCD(equation[0]);
         case ('multiply'):
-            equation[0] *= equation[1];;
+            equation[0] *= equation[1];
             return updateLCD(equation[0]);
         case ('division'):
             equation[0] /= equation[1];;

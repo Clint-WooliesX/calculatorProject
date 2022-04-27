@@ -13,29 +13,28 @@
 }
 
 @font-face {
-  font-family: "myFirstFont";
+  font-family: 'myFirstFont';
   src: url(/media/digital.ttf);
 }
 
-.debug-mode{
-  display:flex;
+.debug-mode {
+  display: flex;
   justify-content: space-around;
-  position:absolute;
-  top:0;
-  left:0;
-  background-color:black;
-  color:white;
-  width:100%,
-} 
-
-.debug{
-  display:flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+  width: 100%;
 }
 
-.debug > p{
-  color:greenyellow
+.debug {
+  display: flex;
 }
 
+.debug > p {
+  color: greenyellow;
+}
 
 body {
   background-image: url(/media/wood.jpg);
@@ -104,6 +103,60 @@ body {
     box-shadow: inset 1px -2px 1px rgba(0, 0, 0, 0.527);
   }
 }
+
+.on-switch {
+  display: flex;
+  position: absolute;
+  z-index: 7;
+  border-radius: 20px;
+  border: 3px inset #2e2d27d0;
+  box-shadow: inset 2px 2px 4px black;
+  top: 15px;
+  left: 40px;
+  width: 80px;
+  height: 40px;
+  background-color: #3a3a39;
+}
+.on-off-label {
+  display: flex;
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  justify-content: space-around;
+  align-items: center;
+  width: 72px;
+  height: 35px;
+  font-size: 17px;
+  font-weight: 10;
+  color: white;
+  font-family: 'Staatliches';
+}
+
+.slider {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  z-index: 9;
+  border-radius: 20px;
+  border: 3px outset #2e2d27d0;
+  top: 4px;
+  left: 9px;
+  width: 38px;
+  height: 30px;
+  background-color: #5f5f5d;
+  transition: 300ms;
+  &--on {
+    left: 30px;
+    transition: 300ms;
+  }
+}
+
+.back-light {
+  display: flex;
+}
+
 .solar {
   border: 3px inset black;
   position: absolute;
@@ -116,7 +169,7 @@ body {
 }
 
 .display {
-  font-family: "digital";
+  font-family: 'digital';
   background: #a4b1a6;
   position: absolute;
   top: 70px;
@@ -126,13 +179,19 @@ body {
   border: 7px inset #2e2d27d0;
   border-radius: 15px;
   box-shadow: inset 3px 3px 10px black;
+  &--glow {
+    background: #92e59f;
+    box-shadow: 1px 1px 30px #92e59f76, -1px -1px 30px #92e59f76;
+    color: rgba(0, 0, 0, 0.594);
+    transition: 300ms;
+  }
 }
 
 .num-input {
   position: absolute;
   top: 5px;
   right: 10px;
-  font-family: "myFirstFont";
+  font-family: 'myFirstFont';
   font-size: 58px;
   letter-spacing: 5px;
   text-align: right;
@@ -142,12 +201,9 @@ body {
   width: 100%;
   height: 65px;
   margin: 0;
-  //   &:focus {
-  //     outline: none;
-  //   }
+
   &--commas {
     position: absolute;
-    // display: none;
     letter-spacing: 5px;
     right: -5.5px;
   }
@@ -196,8 +252,8 @@ body {
   width: 100%;
   height: 100%;
   color: white;
-  font-family: "Grape Nuts", cursive;
-  font-family: "Lato", sans-serif;
+  font-family: 'Grape Nuts', cursive;
+  font-family: 'Lato', sans-serif;
   text-align: center;
   background-color: #2a2827;
   border-top-left-radius: 8px;
@@ -231,16 +287,3 @@ body {
     transition: 0.25s;
   }
 }
-
-// .button-text {
-//   cursor: pointer;
-//   font-family: "Grape Nuts", cursive;
-//   font-family: "Lato", sans-serif;
-//   text-align: center;
-//   &--small-font {
-//     font-size: 20px;
-//   }
-//   &--medium-font {
-//     font-size: 34px;
-//   }
-// }

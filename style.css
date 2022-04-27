@@ -99,6 +99,60 @@ body {
   box-shadow: inset 1px -2px 1px rgba(0, 0, 0, 0.527);
 }
 
+.on-switch {
+  display: flex;
+  position: absolute;
+  z-index: 7;
+  border-radius: 20px;
+  border: 3px inset rgba(46, 45, 39, 0.8156862745);
+  box-shadow: inset 2px 2px 4px black;
+  top: 15px;
+  left: 40px;
+  width: 80px;
+  height: 40px;
+  background-color: #3a3a39;
+}
+
+.on-off-label {
+  display: flex;
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  justify-content: space-around;
+  align-items: center;
+  width: 72px;
+  height: 35px;
+  font-size: 17px;
+  font-weight: 10;
+  color: white;
+  font-family: "Staatliches";
+}
+
+.slider {
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  z-index: 9;
+  border-radius: 20px;
+  border: 3px outset rgba(46, 45, 39, 0.8156862745);
+  top: 4px;
+  left: 9px;
+  width: 38px;
+  height: 30px;
+  background-color: #5f5f5d;
+  transition: 300ms;
+}
+.slider--on {
+  left: 30px;
+  transition: 300ms;
+}
+
+.back-light {
+  display: flex;
+}
+
 .solar {
   border: 3px inset black;
   position: absolute;
@@ -121,6 +175,12 @@ body {
   border: 7px inset rgba(46, 45, 39, 0.8156862745);
   border-radius: 15px;
   box-shadow: inset 3px 3px 10px black;
+}
+.display--glow {
+  background: #92e59f;
+  box-shadow: 1px 1px 30px rgba(146, 229, 159, 0.462745098), -1px -1px 30px rgba(146, 229, 159, 0.462745098);
+  color: rgba(0, 0, 0, 0.594);
+  transition: 300ms;
 }
 
 .num-input {

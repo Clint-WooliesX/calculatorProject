@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/scss/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
     <script src="/javascript/javascript.js" defer></script>
     <title>Calculator Project</title>
 </head>
@@ -15,11 +18,16 @@
 <body>
 
     <div id="debugMode" class="debug-mode">
-        <div class="debug">devMode: <p id="debug">on</p></div>
-        <div class="debug">concatData=<p id="concatD">Ready</p></div>
-        <div class="debug">equationArray=<p id="arrayValue">Ready</p></div>
-        <div class="debug">currentOperator=<p id="operatorValue">Ready</p></div>
-        <div class="debug">index=<p id="index">Ready</p></div>
+        <div class="debug">devMode: <p id="debug">on</p>
+        </div>
+        <div class="debug">concatData=<p id="concatD">Ready</p>
+        </div>
+        <div class="debug">equationArray=<p id="arrayValue">Ready</p>
+        </div>
+        <div class="debug">currentOperator=<p id="operatorValue">Ready</p>
+        </div>
+        <div class="debug">index=<p id="index">Ready</p>
+        </div>
     </div>
 
     <div class="mask">
@@ -27,8 +35,15 @@
         </div>
         <div class="grooves"></div>
         <div class="grooves--divider"></div>
+        <div  class="on-switch">
+            <div class="on-off-label">
+                <div class="powerLabel">1</div>
+                <div class="powerLabel">0</div>
+            </div>
+            <div id="power" class="slider"><img class="back-light" src="/media/backLight.png"></div>
+        </div>
         <img class="solar" src="/media/solar.png" alt="" srcset="">
-        <div class="display">
+        <div id="display" class="display">
             <p id="LCDnumbers" class="num-input">0</p>
             <p id="LCDcommas" class="num-input num-input--commas"></p>
             <div class="num-input num-input__indicators--smallR">
@@ -64,8 +79,7 @@
                 <div id="one" class="push-button push-button--medium-font">1</div>
                 <div id="two" class="push-button push-button--medium-font">2</div>
                 <div id="three" class="push-button push-button--medium-font">3</div>
-                <div id="addition"
-                    class="push-button push-button--large push-button--medium-font">+</div>
+                <div id="addition" class="push-button push-button--large push-button--medium-font">+</div>
                 <div id="zero" class="push-button push-button--medium-font">0</div>
                 <div id="decimal" class="push-button push-button--medium-font">.</div>
                 <div id="equals" class="push-button push-button--medium-font">=</div>
