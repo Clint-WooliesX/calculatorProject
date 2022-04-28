@@ -5,7 +5,7 @@
 const soundFX = true;
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
-const useCommas = true;
+const useCommas = false;
 if (useCommas == true) {
     //change font size location
     document.getElementById('LCDnumbers').style = "font-size:35px;top:20px";
