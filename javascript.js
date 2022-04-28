@@ -85,8 +85,9 @@ const lcd = (arg) => {
 
 //global Variables
 //Attempted to make arrays const variables but it breaks code. suspect it has something to do with scope
-let buttonInputs = [], equation = [], operator = [];
-let index = 0, concatData = '', errorState = false;
+const buttonInputs = [], equation = [];
+let 
+let operator, index = 0, concatData = '', errorState = false;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -201,7 +202,7 @@ const cce = () => {
     }
     //Second press - clear all
     resetVars();
-    operator = [];
+    operator="";
     equation = [];
     index = 0;
     updateLCD(0);
@@ -221,7 +222,7 @@ const storeConcatData = (concatData) => {
 // Store Operation
 //----------------------------------------------------------//
 const storeOperation = (input) => {
-    operator.push(input);
+    operator=input;
     buttonInputs = [];
     concatData = '';
     if (operator.length >= 2) solveEquation(input);
@@ -233,9 +234,9 @@ const storeOperation = (input) => {
 //----------------------------------------------------------//
 const solveEquation = (input) => {
     //allow change of operator
-    if (isNaN(equation[1])) return operator.shift(input);
+    if (isNaN(equation[1])) return operator=input;
     //solve equation using current operator
-    const operation = operator.shift();
+    const operation = operator;
     switch (operation) {
         case ('+'):
             equation[0] += equation[1];
