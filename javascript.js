@@ -12,10 +12,10 @@ if (useCommas == true) {
     //limit max digits on screen
     numDigits = 9;
 } else {
-    numDigits = 7;
+    numDigits = 8;
 }
 //turn HTML debug mode on/off
-const debugMode = false;
+const debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 // ########--------- SETTINGS ---------###########
@@ -140,6 +140,8 @@ const buttonInput = (button) => {
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
 
+    if(button === '.' && concatData.includes('.')) return
+
     //handle value longer than 7 digits
     if (buttonInputs.length <= numDigits) buttonInputs.push(button);
 
@@ -154,11 +156,12 @@ const buttonInput = (button) => {
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
     if (argument.toString().length > numDigits + 1) {
-        for (i = 10; i  > 0; i--) {
-            console.log(i)
-            argument = parseFloat(argument).toFixed(i);
-            if (argument.toString().length < numDigits + 1)break;
-        } return updateLCD(argument);
+        let fifteenDp = argument.toFixed(15)
+        for (i = 15; i  > 0; i--) {
+            console.log(i," decimals shaved off")
+            fifteenDp = parseFloat(fifteenDp).toFixed(i);
+            if (fifteenDp.toString().length < numDigits + 1)break;
+        } return updateLCD(fifteenDp);
     }
     if (argument.toString().length > numDigits + 1) {
         argument = 'error';
