@@ -85,7 +85,9 @@ const lcd = (arg) => {
 
 //global Variables
 //Attempted to make arrays const variables but it breaks code. suspect it has something to do with scope
-let buttonInputs = [], equation = [], operator = [];
+const buttonInputs = []
+const equation = []
+const operator = [];
 let index = 0, concatData = '', errorState = false;
 
 //HTML debug mode easier to see what is happening than console
@@ -188,7 +190,7 @@ const cce = () => {
     //sub function replaced duplicated code
     const resetVars = () => {
         lcd('opOff');
-        buttonInputs = [];
+        buttonInputs.length =0;
         concatData = '';
         errorState = false;
     };
@@ -204,8 +206,8 @@ const cce = () => {
     }
     //Second press - clear all
     resetVars();
-    operator = [];
-    equation = [];
+    operator.length = 0;
+    equation.length = 0;
     index = 0;
     updateLCD(0);
     debug();
@@ -225,7 +227,7 @@ const storeConcatData = (concatData) => {
 //----------------------------------------------------------//
 const storeOperation = (input) => {
     operator.push(input);
-    buttonInputs = [];
+    buttonInputs.length = 0;
     concatData = '';
     if (operator.length >= 2) solveEquation(input);
     equation.pop();
