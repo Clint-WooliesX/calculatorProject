@@ -15,7 +15,7 @@ if (useCommas == true) {
     numDigits = 8;
 }
 //turn HTML debug mode on/off
-const debugMode = true;
+const debugMode = false;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 // ########--------- SETTINGS ---------###########
