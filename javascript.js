@@ -12,7 +12,7 @@ if (useCommas == true) {
     //limit max digits on screen
     numDigits = 9;
 } else {
-    numDigits = 8;
+    numDigits = 7;
 }
 //turn HTML debug mode on/off
 const debugMode = true;
@@ -164,8 +164,8 @@ const updateLCD = (argument) => {
             for (i = 15; i > 0; i--) {
                 console.log(i, " decimals shaved off");
                 fifteenDp = parseFloat(fifteenDp).toFixed(i);
-                if (fifteenDp.toString().length < numDigits + 1) break;
-            } return updateLCD(fifteenDp);
+                if (fifteenDp.toString().length < numDigits + 2) break;
+            } argument=fifteenDp;
         }
     }
     if (argument.toString().length > numDigits + 1) {
