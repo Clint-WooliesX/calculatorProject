@@ -1,8 +1,19 @@
 import * as Lcd from './modules/lcd.js';
 
+//global Variables
+export const buttonInputs = [];
+export const equation = [];
+export const operator = [];
+export let index, concatData, errorState;
+export let soundFX;
+window.index = 0;
+window.concatData = '';
+window.errorState = false;
+
 // ########--------- SETTINGS ---------###########
-let numDigits;
-export const soundFX = true;
+export let numDigits;
+
+window.soundFX = true
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
 const useCommas = false;
@@ -10,32 +21,15 @@ if (useCommas == true) {
     //change font size location
     document.getElementById('LCDnumbers').style = "font-size:35px;top:20px";
     //limit max digits on screen
-    numDigits = 9;
+    window.numDigits = 9;
 } else {
-    numDigits = 8;
+    window.numDigits = 8;
 }
 //turn HTML debug mode on/off
 const debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 // ########--------- SETTINGS ---------###########
-
-
-
-//get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
-export const calcButton = document.querySelectorAll('.push-button');
-for (let i = 0; i < calcButton.length; i++) {
-    calcButton[i].addEventListener('mouseup', function () {
-        buttonInput(this.innerText);
-    });
-}
-
-//event listener for power back light switch
-export const powerSwitch = document.getElementById('power');
-export const displayToggle = document.getElementById('display');
-export const lightLabel = document.getElementById('powerLabel');
-powerSwitch.addEventListener('mousedown', function () { Lcd.powerToggle(); });
-
 
 
 //backlight switch soundFx
@@ -50,14 +44,6 @@ export const soundFx1 = () => {
     audio.play();
 };
 
-//global Variables
-export const buttonInputs = [];
-export const equation = [];
-export const operator = [];
-export let index, concatData, errorState;
-window.index = 0;
-window.concatData = '';
-window.errorState = false;
 
 //List of operation buttons that should not be handled like digits
 export const fButtons = ["C-CE", '+/-', '√', '%', 'MRC', 'M-', 'M+', '÷', 'x', '-', '+', '='];
@@ -96,7 +82,11 @@ export const buttonInput = (button) => {
     //console.log here for demo purposes
     console.log(button);
 
-    if (soundFX == true) soundFx1();
+    if (window.soundFX == true) {
+        console.log('sound was true')
+        soundFx1();} else{
+        console.log('sound was false')
+        }
 
     //Input from HTML
     // const button = input;
@@ -121,7 +111,7 @@ export const buttonInput = (button) => {
     if (button === '.' && window.concatData.includes('.')) return;
 
     //handle value longer than 7 digits
-    if (buttonInputs.length <= numDigits) buttonInputs.push(button);
+    if (buttonInputs.length <= window.numDigits) buttonInputs.push(button);
 
     //concatenate collected digits into a single number
     window.concatData = buttonInputs.join("");

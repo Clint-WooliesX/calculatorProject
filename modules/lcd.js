@@ -1,15 +1,16 @@
 import * as Main from "../javascript.js";
+import * as Events from './events.js'
 // import { powerSwitch, displayToggle, lightLabel, calcButton } from "../javascript.js";
 
 //back light fx
 export const powerToggle = () => {
-    Main.powerSwitch.classList.toggle("slider--on");
-    Main.displayToggle.classList.toggle("display--glow");
-    Main.lightLabel.classList.toggle("on-off-label--glow");
-    for (let i = 0; i < Main.calcButton.length; i++) {
-        Main.calcButton[i].classList.toggle("push-button--glow");
+    Events.powerSwitch.classList.toggle("slider--on");
+    Events.displayToggle.classList.toggle("display--glow");
+    Events.lightLabel.classList.toggle("on-off-label--glow");
+    for (let i = 0; i < Events.calcButton.length; i++) {
+        Events.calcButton[i].classList.toggle("push-button--glow");
     }
-    if (Main.soundFX == true) Main.soundFx2();
+    if (window.soundFX == true) Main.soundFx2();
 };
 
 
@@ -37,17 +38,22 @@ export const lcd = (arg) => {
 //----------------------------------------------------------//
 export const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
-    if (argument.toString().length > Main.numDigits + 1) {
-        let fifteenDp = argument.toFixed(15);
-        for (i = 15; i > 0; i--) {
-            console.log(i, " decimals shaved off");
-            fifteenDp = parseFloat(fifteenDp).toFixed(i);
-            if (fifteenDp.toString().length < Main.numDigits + 1) break;
-        } return updateLCD(fifteenDp);
-    }
-    if (argument.toString().length > Main.numDigits + 1) {
+
+// !!!!!!!!!!! DECIMAL PLACE NEEDS TO BE COMPLETELY RE-WRITTEN
+
+    // if (argument.toString().length > window.numDigits + 1) {
+    //     let fifteenDp = argument.toFixed(15);
+    //     for (let i = 15; i > 0; i--) {
+    //         console.log(i, " decimals shaved off");
+    //         fifteenDp = parseFloat(fifteenDp).toFixed(i);
+    //         if (fifteenDp.toString().length < window.numDigits + 1) break;
+    //     } return updateLCD(fifteenDp);
+    // }
+    if (argument.toString().length > window.numDigits + 1) {
+        console.log('string length was run and was true');
+        
         argument = 'error';
-        errorState = true;
+        window.errorState = true;
     }
     if (Main.useCommas == true) {
         //uses comma separators
