@@ -15,7 +15,7 @@ if (useCommas == true) {
     numDigits = 8;
 }
 //turn HTML debug mode on/off
-const debugMode = false;
+const debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 // ########--------- SETTINGS ---------###########
@@ -85,8 +85,8 @@ const lcd = (arg) => {
 
 //global Variables
 //Attempted to make arrays const variables but it breaks code. suspect it has something to do with scope
-const buttonInputs = []
-const equation = []
+const buttonInputs = [];
+const equation = [];
 const operator = [];
 let index = 0, concatData = '', errorState = false;
 
@@ -142,7 +142,7 @@ const buttonInput = (button) => {
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
 
-    if(button === '.' && concatData.includes('.')) return
+    if (button === '.' && concatData.includes('.')) return;
 
     //handle value longer than 7 digits
     if (buttonInputs.length <= numDigits) buttonInputs.push(button);
@@ -157,13 +157,16 @@ const buttonInput = (button) => {
 //----------------------------------------------------------//
 const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
-    if (argument.toString().length > numDigits + 1) {
-        let fifteenDp = argument.toFixed(15)
-        for (i = 15; i  > 0; i--) {
-            console.log(i," decimals shaved off")
-            fifteenDp = parseFloat(fifteenDp).toFixed(i);
-            if (fifteenDp.toString().length < numDigits + 1)break;
-        } return updateLCD(fifteenDp);
+    if (argument.toString().includes('.')) {
+        if (argument.toString().length > numDigits + 1) {
+            console.log('the decimal code has been run');
+            let fifteenDp = argument.toFixed(15);
+            for (i = 15; i > 0; i--) {
+                console.log(i, " decimals shaved off");
+                fifteenDp = parseFloat(fifteenDp).toFixed(i);
+                if (fifteenDp.toString().length < numDigits + 1) break;
+            } return updateLCD(fifteenDp);
+        }
     }
     if (argument.toString().length > numDigits + 1) {
         argument = 'error';
@@ -190,7 +193,7 @@ const cce = () => {
     //sub function replaced duplicated code
     const resetVars = () => {
         lcd('opOff');
-        buttonInputs.length =0;
+        buttonInputs.length = 0;
         concatData = '';
         errorState = false;
     };
