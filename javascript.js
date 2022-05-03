@@ -1,8 +1,8 @@
-
+import * as Lcd from './modules/lcd.js';
 
 // ########--------- SETTINGS ---------###########
-
-const soundFX = true;
+let numDigits;
+export const soundFX = true;
 //--------Set useCommas = <true/false>
 //---changes font size and location to fit comma separators
 const useCommas = false;
@@ -15,7 +15,7 @@ if (useCommas == true) {
     numDigits = 8;
 }
 //turn HTML debug mode on/off
-const debugMode = false;
+const debugMode = true;
 if (debugMode == false) document.getElementById('debugMode').style = "display:none";
 
 // ########--------- SETTINGS ---------###########
@@ -23,84 +23,76 @@ if (debugMode == false) document.getElementById('debugMode').style = "display:no
 
 
 //get all buttons with class '.push-button'. Assign eventListener click and return ID of clicked button
-const calcButton = document.querySelectorAll('.push-button');
-for (i = 0; i < calcButton.length; i++) {
+export const calcButton = document.querySelectorAll('.push-button');
+for (let i = 0; i < calcButton.length; i++) {
     calcButton[i].addEventListener('mouseup', function () {
         buttonInput(this.innerText);
     });
 }
 
 //event listener for power back light switch
-const powerSwitch = document.getElementById('power');
-const displayToggle = document.getElementById('display');
-const lightLabel = document.getElementById('powerLabel');
-powerSwitch.addEventListener('mousedown', function () { powerToggle(); });
+export const powerSwitch = document.getElementById('power');
+export const displayToggle = document.getElementById('display');
+export const lightLabel = document.getElementById('powerLabel');
+powerSwitch.addEventListener('mousedown', function () { Lcd.powerToggle(); });
 
-//back light fx
-const powerToggle = () => {
-    console.log('mouseup');
-    powerSwitch.classList.toggle("slider--on");
-    displayToggle.classList.toggle("display--glow");
-    lightLabel.classList.toggle("on-off-label--glow");
-    for (i = 0; i < calcButton.length; i++) {
-        calcButton[i].classList.toggle("push-button--glow");
-    }
-    if (soundFX == true) soundFx2();
-};
+
 
 //backlight switch soundFx
-const soundFx2 = () => {
+export const soundFx2 = () => {
     const audio = new Audio('/media/lightSwitch.m4a');
     audio.play();
 };
 
 //button press soundFx
-const soundFx1 = () => {
+export const soundFx1 = () => {
     const audio = new Audio('/media/soundfx.m4a');
     audio.play();
 };
 
-//List of operation buttons that should not be handled like digits
-const fButtons = ["C-CE", '+/-', '√', '%', 'MRC', 'M-', 'M+', '÷', 'x', '-', '+', '='];
-
-//function to switch on and off various LCD indicators
-const lcd = (arg) => {
-    const LCDoperator = document.getElementById('LCDoperator');
-    const LCDmemory = document.getElementById('LCDmemory');
-    switch (arg) {
-        //------- Operator indicators --------//
-        case 'opOff': return LCDoperator.innerHTML = '&nbsp;';
-        case '+': return LCDoperator.innerHTML = '+';
-        case '-': return LCDoperator.innerHTML = '-';
-        case 'x': return LCDoperator.innerHTML = 'x';
-        case '/': return LCDoperator.innerHTML = '&#xF7';
-        case '%': return LCDoperator.innerHTML = '%';
-        case 'root': return LCDoperator.innerHTML = '&#8730';
-        //------- Memory indicators --------//
-        case 'memOff': return LCDmemory.innerHTML = '&nbsp;';
-        case 'm': return LCDmemory.innerHTML = 'M';
-        default: return;
-    }
-};
-
 //global Variables
-//Attempted to make arrays const variables but it breaks code. suspect it has something to do with scope
-const buttonInputs = []
-const equation = []
-const operator = [];
-let index = 0, concatData = '', errorState = false;
+export const buttonInputs = [];
+export const equation = [];
+export const operator = [];
+export let index, concatData, errorState;
+window.index = 0;
+window.concatData = '';
+window.errorState = false;
+
+//List of operation buttons that should not be handled like digits
+export const fButtons = ["C-CE", '+/-', '√', '%', 'MRC', 'M-', 'M+', '÷', 'x', '-', '+', '='];
+
 
 //HTML debug mode easier to see what is happening than console
-const debug = () => {
-    document.getElementById('concatD').innerHTML = concatData;
+export const debug = () => {
+    document.getElementById('concatD').innerHTML = window.concatData;
     document.getElementById('arrayValue').innerHTML = equation;
     document.getElementById('operatorValue').innerHTML = operator;
-    document.getElementById('index').innerHTML = index;
+    document.getElementById('index').innerHTML = window.index;
 };
+
+//sub function replaced about 50 lines of code
+//not sure if it should reside outside of if statement
+export const operatorKey = (input) => {
+    if (equation[0] == undefined) {
+        // return console.log('operatorkey sub function')
+    };
+    Lcd.lcd(input);
+    if (input === '=') {
+        Lcd.lcd('opOff');
+        Lcd.updateLCD(equation[0]);
+    }
+    storeConcatData(window.concatData);
+    console.log('this was run after equals key');
+
+    window.index = 1;
+    return storeOperation(input);
+};
+
 
 // Collect button inputs
 //----------------------------------------------------------//
-const buttonInput = (button) => {
+export const buttonInput = (button) => {
     //console.log here for demo purposes
     console.log(button);
 
@@ -110,76 +102,30 @@ const buttonInput = (button) => {
     // const button = input;
     //validation                       ================> needs optimising
     if (fButtons.includes(button)) {
-
-        //sub function replaced about 50 lines of code
-        //not sure if it should reside outside of if statement
-        const operatorKey = (input) => {
-            if (equation[0] == undefined) return;
-            lcd(input);
-            if (input === '=') {
-                lcd('opOff');
-                updateLCD(equation[0]);
-            }
-            storeConcatData(concatData);
-            index = 1;
-            return storeOperation(input);
-        };
-        //requires its own function call
         if (button === 'C-CE') return cce();
 
         // REMOVE ONCE KEYS ARE CODED
         const notCoded = ['+/-', '√', '%', 'MRC', 'M-', 'M+'];
         if (notCoded.includes(button)) return alert('Sorry, not coded yet.');
-
         return operatorKey(button);
     }
     // prevent further input until error state cleaed with C-CE button
-    if (errorState === true) return;
+    if (window.errorState === true) return;
 
     //prevent leading zeros
-    if (button === '0' && parseFloat(concatData) == 0) return;
+    if (button === '0' && parseFloat(window.concatData) == 0) return;
 
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
 
-    if(button === '.' && concatData.includes('.')) return
+    if (button === '.' && window.concatData.includes('.')) return;
 
     //handle value longer than 7 digits
     if (buttonInputs.length <= numDigits) buttonInputs.push(button);
 
     //concatenate collected digits into a single number
-    concatData = buttonInputs.join("");
-    if (isNaN(concatData) != true) updateLCD(concatData);
-    debug();
-};
-
-// Update LCD
-//----------------------------------------------------------//
-const updateLCD = (argument) => {
-    if (isNaN(argument)) return; //return if result is NaN
-    if (argument.toString().length > numDigits + 1) {
-        let fifteenDp = argument.toFixed(15)
-        for (i = 15; i  > 0; i--) {
-            console.log(i," decimals shaved off")
-            fifteenDp = parseFloat(fifteenDp).toFixed(i);
-            if (fifteenDp.toString().length < numDigits + 1)break;
-        } return updateLCD(fifteenDp);
-    }
-    if (argument.toString().length > numDigits + 1) {
-        argument = 'error';
-        errorState = true;
-    }
-    if (useCommas == true) {
-        //uses comma separators
-        //Regex inserts a comma separators
-        document.getElementById('LCDnumbers').innerHTML = argument.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    } else {
-        //no commas
-        document.getElementById('LCDnumbers').innerHTML = argument;
-    };
-
-
-    equation[index] = parseFloat(argument); // value to equation
+    window.concatData = buttonInputs.join("");
+    if (isNaN(window.concatData) != true) Lcd.updateLCD(window.concatData);
     debug();
 };
 
@@ -189,10 +135,10 @@ const cce = () => {
 
     //sub function replaced duplicated code
     const resetVars = () => {
-        lcd('opOff');
-        buttonInputs.length =0;
-        concatData = '';
-        errorState = false;
+        Lcd.lcd('opOff');
+        buttonInputs.length = 0;
+        window.concatData = '';
+        window.errorState = false;
     };
 
     //first press - Clear
@@ -200,7 +146,7 @@ const cce = () => {
         console.log('clear only last input and operator');
         equation.pop();
         resetVars();
-        updateLCD('0');
+        Lcd.updateLCD('0');
         debug();
         return;
     }
@@ -208,14 +154,15 @@ const cce = () => {
     resetVars();
     operator.length = 0;
     equation.length = 0;
-    index = 0;
-    updateLCD(0);
+    window.index = 0;
+    Lcd.updateLCD(0);
     debug();
 };
 
 // Store Data
 //----------------------------------------------------------//
 const storeConcatData = (concatData) => {
+    console.log('store conCat has been run');
     //remove old value
     if (equation.length >= 2) equation.pop();
     //save new value
@@ -228,7 +175,7 @@ const storeConcatData = (concatData) => {
 const storeOperation = (input) => {
     operator.push(input);
     buttonInputs.length = 0;
-    concatData = '';
+    window.concatData = '';
     if (operator.length >= 2) solveEquation(input);
     equation.pop();
     debug();
@@ -244,15 +191,16 @@ const solveEquation = (input) => {
     switch (operation) {
         case ('+'):
             equation[0] += equation[1];
-            return updateLCD(equation[0]);
+            return Lcd.updateLCD(equation[0]);
         case ('-'):
             equation[0] -= equation[1];
-            return updateLCD(equation[0]);
+            return Lcd.updateLCD(equation[0]);
         case ('x'):
             equation[0] *= equation[1];
-            return updateLCD(equation[0]);
+            return Lcd.updateLCD(equation[0]);
         case ('÷'):
             equation[0] /= equation[1];;
-            return updateLCD(equation[0]);
+            return Lcd.updateLCD(equation[0]);
     }
 };
+
