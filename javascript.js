@@ -88,7 +88,7 @@ const lcd = (arg) => {
 const buttonInputs = [];
 const equation = [];
 const operator = [];
-let index = 0, concatData = '', errorState = false;
+let index = 0, concatData = '', errorState = false, sqrt;
 
 //HTML debug mode easier to see what is happening than console
 const debug = () => {
@@ -118,7 +118,7 @@ const buttonInput = (button) => {
             lcd(input);
             if (input === '=') {
                 lcd('opOff');
-                updateLCD(equation[0]);
+                solveEquation()
             }
             storeConcatData(concatData);
             index = 1;
@@ -127,8 +127,13 @@ const buttonInput = (button) => {
         //requires its own function call
         if (button === 'C-CE') return cce();
 
+        if( button === '√' && concatData.length >0){
+            let sqrt = Math.sqrt(parseFloat(concatData))
+            return updateLCD(sqrt)
+        }
+
         // REMOVE ONCE KEYS ARE CODED
-        const notCoded = ['+/-', '√', '%', 'MRC', 'M-', 'M+'];
+        const notCoded = ['+/-', '%', 'MRC', 'M-', 'M+'];
         if (notCoded.includes(button)) return alert('Sorry, not coded yet.');
 
         return operatorKey(button);
@@ -137,7 +142,7 @@ const buttonInput = (button) => {
     if (errorState === true) return;
 
     //prevent leading zeros
-    if (button === '0' && parseFloat(concatData) == 0) return;
+    if (button === '0' && concatData.length <= 1) return;
 
     //handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
@@ -159,7 +164,7 @@ const updateLCD = (argument) => {
     if (isNaN(argument)) return; //return if result is NaN
     if (argument.toString().includes('.')) {
         if (argument.toString().length > numDigits + 1) {
-            console.log('the decimal code has been run');
+            //----- shaves off decimals if they wont fit on screen to prevent error ---//
             let fifteenDp = argument.toFixed(15);
             for (i = 15; i > 0; i--) {
                 console.log(i, " decimals shaved off");
