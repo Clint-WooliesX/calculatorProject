@@ -202,10 +202,10 @@ body {
   height: 65px;
   margin: 0;
 }
-.num-input--commas {
+.num-input--date {
   position: absolute;
-  letter-spacing: 5px;
-  right: -5.5px;
+  top: 50px;
+  font-size: 12px;
 }
 .num-input__indicators {
   position: absolute;
@@ -225,6 +225,7 @@ body {
   display: flex;
   position: absolute;
   top: 164px;
+  left: 1px;
   height: 355px;
   width: 100%;
   z-index: 6;
@@ -236,7 +237,7 @@ body {
   margin-left: 25px;
   margin-right: 25px;
   row-gap: 3px;
-  column-gap: 12px;
+  column-gap: 9px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 35px repeat(5, 1fr);
   height: 96%;

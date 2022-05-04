@@ -11,6 +11,7 @@ const
     buttonInputs = [],
     equation = [],
     operator = [];
+
 // List of operation buttons that should not be handled like digits
 const fButtons = ["C-CE", '+/-', '√', '%', 'MRC', 'M-', 'M+', '÷', 'x', '-', '+', '='];
 let
@@ -20,7 +21,9 @@ let
     sqrt,
     calcMem = 0,
     lastButton = '',
-    pressedTwice = false;
+    pressedTwice = false,
+    theDate,
+    formatDate;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // DOM Variables
@@ -83,7 +86,7 @@ const lcd = (arg) => {
         case 'x': return LCDoperator.innerHTML = 'x';
         case '/': return LCDoperator.innerHTML = '&#xF7';
         case '%': return LCDoperator.innerHTML = '%';
-        case 'root': return LCDoperator.innerHTML = '&#8730';
+        case '√': return LCDoperator.innerHTML = '&#8730';
         //------- Memory indicators --------//
         case 'memOff': return LCDmemory.innerHTML = '&nbsp;';
         case 'm': return LCDmemory.innerHTML = 'M';
@@ -95,12 +98,12 @@ const lcd = (arg) => {
 // Collect button inputs and validate them
 const buttonInput = (button) => {
     if (soundFX == true) soundFx1();
-//logic for MRC button 2 presses in a row clears memory
-//---- has potential for better handling of the C-CE button
-//---- has potential for use recursive addition and subtraction
+    //logic for MRC button 2 presses in a row clears memory
+    //---- has potential for better handling of the C-CE button
+    //---- has potential for use recursive addition and subtraction
     if (button == lastButton) {
         pressedTwice = true;
-    } else { pressedTwice = false;lastButton=button }
+    } else { pressedTwice = false; lastButton = button; }
 
     if (fButtons.includes(button)) {
         const operatorKey = (input) => {
@@ -119,6 +122,7 @@ const buttonInput = (button) => {
         if (button === 'C-CE') cce();
 
         if (button === '√' && concatData.length > 0) {
+            lcd('√');
             let sqrt = Math.sqrt(parseFloat(concatData));
             return updateLCD(sqrt);
         }
@@ -134,7 +138,7 @@ const buttonInput = (button) => {
         }
         if (button === 'MRC') {
             concatData = calcMem;
-            if (pressedTwice===true) {
+            if (pressedTwice === true) {
                 calcMem = 0;
                 lcd('memOff');
             }
@@ -253,3 +257,17 @@ const solveEquation = (input) => {
     }
 };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+setInterval(function () {
+    theDate = new Date();
+    document.getElementById('LCDdate').innerText = displayDate()
+},1000);
+
+const displayDate = () => {
+    formatDate = theDate.toString().split(" ");
+    let dateString=''
+    for(let i=0;i<=4;i++){
+        dateString+=formatDate[i]+" "
+    }
+    return dateString;
+}
