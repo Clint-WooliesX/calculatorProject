@@ -3,7 +3,7 @@
 // ########--------- SETTINGS ---------###########
 const soundFX = true;
 const numDigits = 7;
-const debugMode = false;
+const debugMode = true;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Global Variables
@@ -97,13 +97,17 @@ const lcd = (arg) => {
 
 // Collect button inputs and validate them
 const buttonInput = (button) => {
-    if (soundFX == true) soundFx1();
-    //logic for MRC button 2 presses in a row clears memory
-    //---- has potential for better handling of the C-CE button
-    //---- has potential for use recursive addition and subtraction
+//logic for MRC button 2 presses in a row clears memory
+//---- has potential for better handling of the C-CE button
+//---- has potential for use recursive addition and subtraction
     if (button == lastButton) {
         pressedTwice = true;
     } else { pressedTwice = false; lastButton = button; }
+
+    console.log(button);
+    console.log(pressedTwice);
+
+    if (soundFX == true) soundFx1();
 
     if (fButtons.includes(button)) {
         const operatorKey = (input) => {
@@ -144,8 +148,14 @@ const buttonInput = (button) => {
             }
             updateLCD(parseFloat(concatData));
         }
+
+        if (button === '+/-') {
+            updateLCD(parseFloat("-" + concatData));
+        }
+
+
         // REMOVE ONCE KEYS ARE CODED
-        const notCoded = ['+/-', '%'];
+        const notCoded = ['%'];
         if (notCoded.includes(button)) return alert('Sorry, not coded yet.');
         return operatorKey(button);
     }
@@ -260,14 +270,14 @@ const solveEquation = (input) => {
 
 setInterval(function () {
     theDate = new Date();
-    document.getElementById('LCDdate').innerText = displayDate()
-},1000);
+    document.getElementById('LCDdate').innerText = displayDate();
+}, 1000);
 
 const displayDate = () => {
     formatDate = theDate.toString().split(" ");
-    let dateString=''
-    for(let i=0;i<=4;i++){
-        dateString+=formatDate[i]+" "
+    let dateString = '';
+    for (let i = 0; i <= 4; i++) {
+        dateString += formatDate[i] + " ";
     }
     return dateString;
-}
+};
