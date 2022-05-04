@@ -1,9 +1,9 @@
 // Calculator Project by Clint Kingston 2022
-
+alert('Welcome to my JavaScript Calculator. While basic arithmetic is fully functional some of the additional function keys may have unexpected results in some use cases. Thank you and enjoy!')
 // ########--------- SETTINGS ---------###########
 const soundFX = true;
 const numDigits = 7;
-const debugMode = true;
+const debugMode = false;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Global Variables
@@ -106,6 +106,7 @@ const buttonInput = (button) => {
 
     console.log(button);
     console.log(pressedTwice);
+    console.log(index);
 
     if (soundFX == true) soundFx1();
 
@@ -118,7 +119,7 @@ const buttonInput = (button) => {
                 solveEquation();
             }
             storeConcatData(concatData);
-            if (button != 'C-CE')
+            if (button != 'C-CE'&& button != '+/-')
                 index = 1;
             return storeOperation(input);
         };
@@ -150,6 +151,7 @@ const buttonInput = (button) => {
         }
 
         if (button === '+/-') {
+            if(concatData.length == 0)return
             updateLCD(parseFloat("-" + concatData));
         }
 
@@ -281,3 +283,4 @@ const displayDate = () => {
     }
     return dateString;
 };
+
