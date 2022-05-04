@@ -1,10 +1,12 @@
 // Calculator Project by Clint Kingston 2022
-alert('Welcome to my JavaScript Calculator. While basic arithmetic is fully functional some of the additional function keys may have unexpected results in some use cases. Thank you and enjoy!')
+
 // ########--------- SETTINGS ---------###########
 const soundFX = true;
 const numDigits = 7;
 const debugMode = false;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+alert('Welcome to my JavaScript Calculator. While basic arithmetic is fully functional some of the additional function keys may have unexpected results in some use cases. Thank you and enjoy!')
 
 // Global Variables
 const
