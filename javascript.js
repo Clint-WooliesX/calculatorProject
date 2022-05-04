@@ -95,7 +95,9 @@ const lcd = (arg) => {
 // Collect button inputs and validate them
 const buttonInput = (button) => {
     if (soundFX == true) soundFx1();
-
+//logic for MRC button 2 presses in a row clears memory
+//---- has potential for better handling of the C-CE button
+//---- has potential for use recursive addition and subtraction
     if (button == lastButton) {
         pressedTwice = true;
     } else { pressedTwice = false;lastButton=button }
@@ -109,7 +111,6 @@ const buttonInput = (button) => {
                 solveEquation();
             }
             storeConcatData(concatData);
-            console.log('is this being indexed here');
             if (button != 'C-CE')
                 index = 1;
             return storeOperation(input);
@@ -168,7 +169,6 @@ const updateLCD = (argument) => {
             // Shaves off decimals if they wont fit on screen to prevent error
             let fifteenDp = argument.toFixed(15);
             for (i = 15; i > 0; i--) {
-                console.log(i, " decimals shaved off");
                 fifteenDp = parseFloat(fifteenDp).toFixed(i);
                 if (fifteenDp.toString().length < numDigits + 2) break;
             } argument = fifteenDp;
@@ -194,7 +194,6 @@ const cce = () => {
     };
     //first press - Clear
     if (equation.length == 2) {
-        console.log('clear only last input and operator');
         equation.pop();
         resetVars();
         updateLCD('0');
@@ -202,9 +201,7 @@ const cce = () => {
         return;
     }
     //Second press - clear all
-    console.log('clear everything');
     resetVars();
-    console.log('does clear continue?');
     operator.length = 0;
     equation.length = 0;
     index = 0;
