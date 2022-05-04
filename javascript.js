@@ -18,7 +18,9 @@ let
     concatData = '',
     errorState = false,
     sqrt,
-    calcMem=0;
+    calcMem = 0,
+    lastButton = '',
+    pressedTwice = false;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // DOM Variables
@@ -93,6 +95,11 @@ const lcd = (arg) => {
 // Collect button inputs and validate them
 const buttonInput = (button) => {
     if (soundFX == true) soundFx1();
+
+    if (button == lastButton) {
+        pressedTwice = true;
+    } else { pressedTwice = false;lastButton=button }
+
     if (fButtons.includes(button)) {
         const operatorKey = (input) => {
             if (equation[0] == undefined) return;
@@ -103,8 +110,8 @@ const buttonInput = (button) => {
             }
             storeConcatData(concatData);
             console.log('is this being indexed here');
-            if(button != 'C-CE')
-            index = 1;
+            if (button != 'C-CE')
+                index = 1;
             return storeOperation(input);
         };
         //requires its own function call
@@ -125,11 +132,12 @@ const buttonInput = (button) => {
             return lcd('m');
         }
         if (button === 'MRC') {
-            console.log('does this get run');
-            
-            equation[index] = calcMem;
-            updateLCD(equation[index]);
-            return;
+            concatData = calcMem;
+            if (pressedTwice===true) {
+                calcMem = 0;
+                lcd('memOff');
+            }
+            updateLCD(parseFloat(concatData));
         }
         // REMOVE ONCE KEYS ARE CODED
         const notCoded = ['+/-', '%'];
@@ -157,7 +165,7 @@ const updateLCD = (argument) => {
     if (isNaN(argument)) return;
     if (argument.toString().includes('.')) {
         if (argument.toString().length > numDigits + 1) {
-// Shaves off decimals if they wont fit on screen to prevent error
+            // Shaves off decimals if they wont fit on screen to prevent error
             let fifteenDp = argument.toFixed(15);
             for (i = 15; i > 0; i--) {
                 console.log(i, " decimals shaved off");
@@ -184,7 +192,7 @@ const cce = () => {
         concatData = '';
         errorState = false;
     };
-//first press - Clear
+    //first press - Clear
     if (equation.length == 2) {
         console.log('clear only last input and operator');
         equation.pop();
@@ -193,7 +201,7 @@ const cce = () => {
         debug();
         return;
     }
-//Second press - clear all
+    //Second press - clear all
     console.log('clear everything');
     resetVars();
     console.log('does clear continue?');
