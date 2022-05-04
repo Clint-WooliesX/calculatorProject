@@ -3,7 +3,7 @@
 // ########--------- SETTINGS ---------###########
 const soundFX = true;
 const numDigits = 7;
-const debugMode = true;
+const debugMode = false;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Global Variables
