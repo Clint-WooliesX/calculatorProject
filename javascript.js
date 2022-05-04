@@ -17,7 +17,8 @@ let
     index = 0,
     concatData = '',
     errorState = false,
-    sqrt;
+    sqrt,
+    calcMem=0;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // DOM Variables
@@ -101,18 +102,37 @@ const buttonInput = (button) => {
                 solveEquation();
             }
             storeConcatData(concatData);
+            console.log('is this being indexed here');
+            if(button != 'C-CE')
             index = 1;
             return storeOperation(input);
         };
         //requires its own function call
-        if (button === 'C-CE') return cce();
+        if (button === 'C-CE') cce();
 
         if (button === '√' && concatData.length > 0) {
             let sqrt = Math.sqrt(parseFloat(concatData));
             return updateLCD(sqrt);
         }
+        // M+
+        if (button === 'M+') {
+            calcMem += equation[index];
+            return lcd('m');
+        }
+        // M-
+        if (button === 'M-') {
+            calcMem -= equation[index];
+            return lcd('m');
+        }
+        if (button === 'MRC') {
+            console.log('does this get run');
+            
+            equation[index] = calcMem;
+            updateLCD(equation[index]);
+            return;
+        }
         // REMOVE ONCE KEYS ARE CODED
-        const notCoded = ['+/-', '%', 'MRC', 'M-', 'M+'];
+        const notCoded = ['+/-', '%'];
         if (notCoded.includes(button)) return alert('Sorry, not coded yet.');
         return operatorKey(button);
     }
@@ -174,7 +194,9 @@ const cce = () => {
         return;
     }
 //Second press - clear all
+    console.log('clear everything');
     resetVars();
+    console.log('does clear continue?');
     operator.length = 0;
     equation.length = 0;
     index = 0;
