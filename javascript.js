@@ -3,10 +3,10 @@
 // ########--------- SETTINGS ---------###########
 const soundFX = true;
 const numDigits = 7;
-const debugMode = false;
+const debugMode = true;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-alert('Welcome to my JavaScript Calculator. While basic arithmetic is fully functional some of the additional function keys may have unexpected results in some use cases. Thank you and enjoy!')
+// alert('Welcome to my JavaScript Calculator. While basic arithmetic is fully functional some of the additional function keys may have unexpected results in some use cases. Thank you and enjoy!')
 
 // Global Variables
 const
@@ -106,9 +106,16 @@ const buttonInput = (button) => {
         pressedTwice = true;
     } else { pressedTwice = false; lastButton = button; }
 
-    console.log(button);
-    console.log(pressedTwice);
-    console.log(index);
+//logic to decide if starting a new equation or using last result
+    if(operator=='=' && /[0-9]/.test(button)){
+        console.log('starting new equation')
+        index=0
+    }
+
+    //uncomment for console debug data
+    // console.log(button);
+    // console.log(pressedTwice);
+    // console.log(index);
 
     if (soundFX == true) soundFx1();
 
