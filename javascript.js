@@ -99,23 +99,23 @@ const lcd = (arg) => {
 
 // Collect button inputs and validate them
 const buttonInput = (button) => {
-//logic for MRC button 2 presses in a row clears memory
-//---- has potential for better handling of the C-CE button
-//---- has potential for use recursive addition and subtraction
+    //logic for MRC button 2 presses in a row clears memory
+    //---- has potential for better handling of the C-CE button
+    //---- has potential for use recursive addition and subtraction
     if (button == lastButton) {
         pressedTwice = true;
     } else { pressedTwice = false; lastButton = button; }
 
-//logic to decide if starting a new equation or using last result
-    if(operator=='=' && /[0-9]/.test(button)){
-        console.log('starting new equation')
-        index=0
+    //logic to decide if starting a new equation or using last result
+    if (operator == '=' && /[0-9]/.test(button)) {
+        console.log('starting new equation');
+        index = 0;
     }
 
-//uncomment for console debug data
-// console.log(button);
-// console.log(pressedTwice);
-// console.log(index);
+    //uncomment for console debug data
+    // console.log(button);
+    // console.log(pressedTwice);
+    // console.log(index);
 
     if (soundFX == true) soundFx1();
 
@@ -128,30 +128,30 @@ const buttonInput = (button) => {
                 solveEquation();
             }
             storeConcatData(concatData);
-            if (button != 'C-CE'&& button != '+/-')
+            if (button != 'C-CE' && button != '+/-')
                 index = 1;
             return storeOperation(input);
         };
-//requires its own function call
+        //requires its own function call
         if (button === 'C-CE') cce();
-// √
+        // √
         if (button === '√' && concatData.length > 0) {
             lcd('√');
             let sqrt = Math.sqrt(parseFloat(concatData));
             return updateLCD(sqrt);
         }
-// %
+        // %
         if (button === '%' && concatData.length > 0) {
             lcd('%');
-            const thePercent = (parseFloat(concatData))/100;
+            const thePercent = (parseFloat(concatData)) / 100;
             return updateLCD(thePercent);
         }
-// M+
+        // M+
         if (button === 'M+') {
             calcMem += equation[index];
             return lcd('m');
         }
-// M-
+        // M-
         if (button === 'M-') {
             calcMem -= equation[index];
             return lcd('m');
@@ -164,9 +164,9 @@ const buttonInput = (button) => {
             }
             updateLCD(parseFloat(concatData));
         }
-// +/-
+        // +/-
         if (button === '+/-') {
-            if(concatData.length == 0)return
+            if (concatData.length == 0) return;
             updateLCD(parseFloat("-" + concatData));
         }
 
@@ -179,7 +179,7 @@ const buttonInput = (button) => {
     // Prevent further input until error state cleared with C-CE button
     if (errorState === true) return;
     // Prevent leading zeros
-    if (button === '0' && concatData.length ==0) return;
+    if (button === '0' && concatData.length == 0) return;
     // Handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
     if (button === '.' && concatData.includes('.')) return;
@@ -285,11 +285,13 @@ const solveEquation = (input) => {
 };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
+// Realtime date and time display
+// interval timer for update
 setInterval(function () {
     theDate = new Date();
     document.getElementById('LCDdate').innerText = displayDate();
 }, 1000);
-
+//strips some unwated data from date string
 const displayDate = () => {
     formatDate = theDate.toString().split(" ");
     let dateString = '';
@@ -298,4 +300,4 @@ const displayDate = () => {
     }
     return dateString;
 };
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
