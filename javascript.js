@@ -112,10 +112,10 @@ const buttonInput = (button) => {
         index=0
     }
 
-    //uncomment for console debug data
-    // console.log(button);
-    // console.log(pressedTwice);
-    // console.log(index);
+//uncomment for console debug data
+// console.log(button);
+// console.log(pressedTwice);
+// console.log(index);
 
     if (soundFX == true) soundFx1();
 
@@ -132,20 +132,26 @@ const buttonInput = (button) => {
                 index = 1;
             return storeOperation(input);
         };
-        //requires its own function call
+//requires its own function call
         if (button === 'C-CE') cce();
-
+// √
         if (button === '√' && concatData.length > 0) {
             lcd('√');
             let sqrt = Math.sqrt(parseFloat(concatData));
             return updateLCD(sqrt);
         }
-        // M+
+// %
+        if (button === '%' && concatData.length > 0) {
+            lcd('%');
+            const thePercent = (parseFloat(concatData))/100;
+            return updateLCD(thePercent);
+        }
+// M+
         if (button === 'M+') {
             calcMem += equation[index];
             return lcd('m');
         }
-        // M-
+// M-
         if (button === 'M-') {
             calcMem -= equation[index];
             return lcd('m');
@@ -158,7 +164,7 @@ const buttonInput = (button) => {
             }
             updateLCD(parseFloat(concatData));
         }
-
+// +/-
         if (button === '+/-') {
             if(concatData.length == 0)return
             updateLCD(parseFloat("-" + concatData));
@@ -173,7 +179,7 @@ const buttonInput = (button) => {
     // Prevent further input until error state cleared with C-CE button
     if (errorState === true) return;
     // Prevent leading zeros
-    if (button === '0' && concatData.length <= 1) return;
+    if (button === '0' && concatData.length ==0) return;
     // Handle decimals
     if (button === '.' && buttonInputs.length == 0) button = '0.';
     if (button === '.' && concatData.includes('.')) return;
